@@ -2,7 +2,213 @@
     --mainBG : #1D262B;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     background-color: var(--mainBG);
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label {
+    display: block;
+}
+
+input {
+    width: -moz-available;
+}
+
+select {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    align-items: end;
+}
+
+.heroName {
+    margin: 0px 0px 0px 20px;
+}
+
+.card {
+    width: 300px;
+    height: 433px;
+    border: 1px solid #FFF7ED;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.rollStats {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.rollStats > abbr {
+    color: #DB59D0;
+    font-weight: bold;
+}
+
+#abl_roll {
+    background-color: transparent;
+    color: white;
+    border: 1px solid #fff7ed;
+    width: 100%;
+    padding: 3px;
+    border-radius: 4px;
+    margin-bottom: 17px;
+    font-family: inherit;
+
+}
+
+::placeholder {
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}
+
+
+.container {
+    width: calc(100% - 30px); max-width: 1080px; margin: 0 auto
+}
+
+
+.wrapper {
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 0 50px;
+    padding: 30px 20px;
+    padding-right: 0;
+    border-radius: 10px;
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+}
+
+.item {
+    width: 300px;
+    border: 1px solid #FFF7ED;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.empty {
+    width: 10px;
+}
+
+.wrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+
+
+
+
+/* —— portrait ascii art */
+.char_port {
+    line-height: 0.75em;
+    white-space: pre;
+    text-align: left;
+    font-weight: normal;
+}
+
+.Human_M:after {
+    content: " ~‴‴‴\a( ʘʖʘ)\a    ~";
+}
+
+.Human_F:after {
+    content: "  ≈≈.\a  ζڄ ڄ\aζ  ϊ )\aζ  ~";
+}
+
+.Elf_M:after {
+    content: " ~‴‴~\a؆ ὍϊὍ)\a    -";
+}
+
+.Elf_F:after {
+    content: "  .ﺣ.\a  ؆ﭳ ﭳ\aζ  ϊ )\aζ  -";
+}
+
+.Dwarf_M:after {
+    content: " ﱎ‴‴‴\a( ಠﱃಠ)\a    -\a   ݬζζ";
+}
+
+.Dwarf_F:after {
+    content: "  --.\a  ζڄ ڄ\aζ  ﱃ )\aﱎ  -";
+}
+
+.Orc_M:after {
+    content: " ~#*#\a{,ಠݢಠ\a(  _ )\a   ^ ^";
+}
+
+.Orc_F:after {
+    content: "  ~≈.\a  ζڄ ڄ\aζ, ݢ \aζ  _ )\a   ^ ^";
+}
+
+.Halfling_M:after {
+    content: " ~≈≈≈\a( ʘدʘ)\a    ֊";
+}
+
+.Halfling_F:after {
+    content: " ~≈≈~\aζ*ʘدʘ)\aζ  ֊";
+}
+
+
+
+.chartoggle {
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    left: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background-color: var(--mainBG);
+}
+
+.chartoggle div:last-child {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+#charscreen {
+    height: 100vh;
+    width: 0;
+    border-right: 1px solid white;
+    box-sizing: border-box;
+    transition: width 1s;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+#charscreen.open {
+    width: 330px;
+}
+
+#charscreen > *:first-child {
+    margin-top: 90px;
+}
+
+#charscreen > * {
+
+    margin: 10px 20px;
+
 }
