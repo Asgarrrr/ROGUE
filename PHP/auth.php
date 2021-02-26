@@ -1,24 +1,7 @@
 
-<?php
-    $type = array_keys($_GET)[0];
-?>
+<?php $type = empty($_GET) ? NULL : array_keys($_GET)[0]; ?>
 
-<style>
-
-    body {
-        font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
-        color: #FFF7ED;
-    }
-
-    .testform{
-        max-width: 300px;
-        border: 1px solid #FFF7ED;
-        padding: 20px;
-        margin: 0 auto;
-    }
-</style>
-
-<form method="post" class="testform">
+<form method="post" class="card">
 
 
     <h2> <?= $type == "register" ? "New traveler" : "Back to hell..."; ?> </h2>
@@ -80,9 +63,10 @@
                 ));
 
                 // —— Start new session and add user data
-                session_start();
-                $_SESSION['_ID']    = $stmt->lastInsertId();;
-                $_SESSION['Login']  = $_POST['login'];
+                if (!isset($_SESSION)) session_start();
+
+                $_SESSION['_userID']    = $stmt->lastInsertId();;
+                $_SESSION['Login']      = $_POST['login'];
 
                 // echo "<script> window.location.href = 'User.php'; </script>";
                 header("Refresh:0");
@@ -115,9 +99,10 @@
                     if (password_verify($_POST['password'], $stmt['Password'])) {
 
                         // —— If password is correct, start new session and add user data
-                        session_start();
-                        $_SESSION['_ID']    = $stmt['_ID'];
-                        $_SESSION['Login']  = $_POST['login'];
+                        if (!isset($_SESSION)) session_start();
+
+                        $_SESSION['_userID'] = $stmt['_ID'];
+                        $_SESSION['Login']   = $_POST['login'];
 
                         // —— Redirec user to his user profil page
                         // echo "<script> window.location.href = 'User.php'; </script>";
