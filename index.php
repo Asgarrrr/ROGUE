@@ -26,6 +26,8 @@
             if (!isset($_SESSION["CharacterID"]))
                 return require "PHP/select.php";
 
+            return header( "Location: PHP/dungeon.php" );
+
         ?>
 
     </body>
