@@ -145,8 +145,7 @@
 
             if (isset($_POST["characterChoice"])) {
 
-                echo $_POST["hero"];
-                //$_SESSION["CharacterID"] = $_POST["characterChoice"];
+                $_SESSION["CharacterID"] = $_POST["characterChoice"];
 
             }
 
