@@ -165,7 +165,6 @@ select {
 }
 
 
-
 .chartoggle {
     position: absolute;
     z-index: 10;
@@ -196,6 +195,9 @@ select {
     transition: width 1s;
     overflow: hidden;
     white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 
