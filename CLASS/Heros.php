@@ -78,11 +78,17 @@
 
         public function PhysicalAttack($target) {
             echo "$this->name attaque $target->eName";
-
+            $target->defense($this->str_score);
         }
 
-        public function defense($target) {
-            $target->HP -= ($this->str_score - $target->eBaseDef);
+        public function MagicalAttack($target) {
+            echo "$this->name attaque $target->eName";
+            $target->defense($this->int_score);
+        }
+
+        public function defense($attack) {
+            $this->HP -= ($attack - $this->def_score);
+            echo "$this->name a perdu ".($attack - $this->def_score)."PV";
         }
 
         public function jsonSerialize() {

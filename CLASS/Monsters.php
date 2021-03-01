@@ -32,8 +32,19 @@
 
         }
 
-        public function attaque() {
+        public function PhysicalAttack($target) {
+            echo "$this->eName attaque $target->name";
+            $target->defense($this->eBaseStr);
+        }
 
+        public function MagicalAttack($target) {
+            echo "$this->eName attaque $target->name";
+            $target->defense($this->eBaseInt);
+        }
+
+        public function defense($attack) {
+            $this->HP -= ($attack - $this->eBaseDef);
+            echo "$this->name a perdu ".($attack - $this->eBaseDef)."PV";
         }
 
         public function jsonSerialize() {
