@@ -29,6 +29,8 @@
             $this->eBaseStr     = $result["eBaseStr"];
             $this->eBaseInt     = $result["eBaseInt"];
             $this->eBaseDef     = $result["eBaseDef"];
+            $this->eBaseHP      = $result["eBaseHP"];
+            $this->eBaseMP      = $result["eBaseMP"];
 
         }
 
