@@ -3,7 +3,6 @@
 
 <form method="post" class="card">
 
-
     <h2> <?= $type == "register" ? "New traveler" : "Back to hell..."; ?> </h2>
 
     <p>
@@ -13,14 +12,14 @@
 
     <p>
         <label for="password">Password</label>
-        <input type="text" name="password" required>
+        <input type="password" name="password" required>
     </p>
 
     <?php if ($type == "register") { ?>
 
         <p>
             <label for="password"> Confirm password</label>
-            <input type="text" name="cpassword" required>
+            <input type="password" name="cpassword" required>
         </p>
 
     <?php } ?>
@@ -108,12 +107,10 @@
                         // echo "<script> window.location.href = 'User.php'; </script>";
                         header("Refresh:0");
                         // —— If password is wrong, show error message
-                    } else  echo "<script>document.getElementById('formInfo').innerHTML = 'Wrong username or password' </script>";
+                    } else echo "<script>document.getElementById('formInfo').innerHTML = 'Wrong username or password' </script>";
                 }
             }
         }
-
     }
-
 
 ?>
