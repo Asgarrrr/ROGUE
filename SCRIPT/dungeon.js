@@ -40,7 +40,7 @@ class Hero {
 
         try {
 
-            this.hero = await fetch("../API/Heros.php", {
+            this.stats = await fetch("../API/Heros.php", {
                 method: "POST",
                 body : JSON.stringify({
                     methode: "jsonSerialize",
@@ -54,27 +54,99 @@ class Hero {
             throw new Error(error);
         }
 
-        console.log(this.hero)
+        console.log(this.stats)
 
     }
 
     async updateUI() {
 
-        document.getElementById("char_port").classList.add(`${this.hero["eName"]}_${this.hero["gender"]}`)
+        document.getElementById("char_port").classList.add(`${this.stats["eName"]}_${this.stats["gender"]}`)
 
-        document.getElementById("heroName").innerText = this.hero["name"];
+        document.getElementById("heroName").innerText = this.stats["name"];
 
-        document.getElementById("level").innerText  = this.hero["level"];
-        document.getElementById("race").innerText   = this.hero["eName"];
-        document.getElementById("class").innerText  = this.hero["class"];
+        document.getElementById("level").innerText  = this.stats["level"];
+        document.getElementById("race").innerText   = this.stats["eName"];
+        document.getElementById("class").innerText  = this.stats["class"];
 
-        document.getElementById("exp").innerText = this.hero["experience"];
+        document.getElementById("exp").innerText = this.stats["experience"];
 
-        document.getElementById("str_score").innerText = this.hero["str_score"];
-        document.getElementById("dex_score").innerText = this.hero["dex_score"];
-        document.getElementById("int_score").innerText = this.hero["int_score"];
-        document.getElementById("con_score").innerText = this.hero["con_score"];
+        document.getElementById("str_score").innerText = this.stats["str_score"];
+        document.getElementById("dex_score").innerText = this.stats["dex_score"];
+        document.getElementById("int_score").innerText = this.stats["int_score"];
+        document.getElementById("con_score").innerText = this.stats["con_score"];
 
+
+    }
+
+    def(damage) {
+
+        this.stats.eBaseHP -= Math.round(damage * (100/(100+parseInt(this.stats.eBaseDef) * 4)));
+        this.updateUI();
+
+        if (this.monster.eBaseHP <= 0 ) {
+
+            console.log('Tu es mort ;3');
+
+        }
+
+    }
+
+}
+
+class Monster {
+
+    constructor(_ID){
+
+        this.load(this._ID = 6);
+
+    }
+
+    async load() {
+
+        try {
+
+            this.monster = await fetch("../API/Monsters.php", {
+                method: "POST",
+                body : JSON.stringify({
+                    methode: "jsonSerialize",
+                    id: this._ID
+                })
+            }).then( ( req ) => req.json() );
+
+            console.log(this.monster)
+
+            //this.updateUI();
+
+        } catch (error) {
+            throw new Error(error);
+        }
+
+
+
+    }
+
+    async updateUI() {
+
+        console.log(this.monster);
+
+    }
+
+    async attaque() {
+
+        hero.def();
+
+    }
+
+    def(damage) {
+
+        this.monster.eBaseHP -= Math.round(damage * (100/(100+parseInt(this.monster.eBaseDef) * 4)));
+        this.updateUI();
+
+        if (this.monster.eBaseHP <= 0 ) {
+
+            console.log('Tu es mort ;3');
+
+        }
 
     }
 
@@ -151,3 +223,61 @@ class Hero {
 document.getElementById("toggle").addEventListener("click", (e) => {
     document.getElementById("charscreen").classList.toggle("open");
 })
+
+
+const attaqueBtn    = document.getElementById("attaque")
+    , action1       = document.getElementById("agir")
+    , action2       = document.getElementById("rester");
+
+
+let turn = true;
+
+
+function changeTurn() {
+
+    turn = !turn;
+
+    attaqueBtn.toggleAttribute("disabled");
+    action1.toggleAttribute("disabled");
+    action2.toggleAttribute("disabled");
+
+    if (turn === false) {
+
+        setTimeout(() => {
+            monster.attaque("HELLO");
+            changeTurn()
+        }, 1000);
+
+    }
+
+}
+
+attaqueBtn.addEventListener("click", async () => {
+
+    if (turn === true) {
+        monster.def(hero.stats.eBaseStr);
+        changeTurn()
+    }
+
+
+
+}, true )
+
+
+
+// document.getElementById("attaque").addEventListener("click", async () => {
+
+//     if (turn === true) {
+
+
+
+//     }
+
+
+
+
+
+
+//     monster.lostHP(hero.stats.eBaseStr);
+
+// }, true)
