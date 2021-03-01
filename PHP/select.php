@@ -10,7 +10,7 @@
                 INNER JOIN Floors  	ON Heros.floor		= Floors._fID
                 INNER JOIN Entity 	ON Heros.baseEntity = Entity._eID
 
-            WHERE Heros._IDUser = 1
+            WHERE Heros._IDUser = ?
 
         ");
 
@@ -37,7 +37,7 @@
 
                     <div class="rollStats">
 
-                        <abbr title="Strength — measuring physical power and carrying capacity"> Str:
+                        <abbr title="Strength — measuring physical power"> Str:
                             <span><?= $value["str_score"] ?></span>
                         </abbr>
 
@@ -45,13 +45,13 @@
                             <span><?= $value["dex_score"] ?></span>
                         </abbr>
 
-                        <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:
+                        <abbr title="Intelligence — measuring ability power and stamina"> Int:
                             <span><?= $value["int_score"] ?></span>
                         </abbr>
 
 
-                        <abbr title="Constitution — measuring endurance, stamina and good health"> Con:
-                            <span><?= $value["con_score"] ?></span>
+                        <abbr title="Defense — measuring blocked damage"> Def:
+                            <span><?= $value["def_score"] ?></span>
                         </abbr>
 
                     </div>
@@ -78,7 +78,7 @@
 
                 <div class="rollStats">
 
-                    <abbr title="Strength — measuring physical power and carrying capacity"> Str:
+                    <abbr title="Strength — measuring physical power"> Str:
                         <span id="str_score">6</span>
                     </abbr>
 
@@ -86,12 +86,12 @@
                         <span id="dex_score">6</span>
                     </abbr>
 
-                    <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:
+                    <abbr title="Intelligence — measuring ability power and stamina"> Int:
                         <span id="int_score">6</span>
                     </abbr>
 
-                    <abbr title="Constitution — measuring endurance, stamina and good health"> Con:
-                        <span id="con_score">6</span>
+                    <abbr title="Defense — measuring blocked damage"> Con:
+                        <span id="def_score">6</span>
                     </abbr>
 
                 </div>

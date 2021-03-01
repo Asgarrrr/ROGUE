@@ -64,7 +64,7 @@
                 // —— Start new session and add user data
                 if (!isset($_SESSION)) session_start();
 
-                $_SESSION['_userID']    = $stmt->lastInsertId();;
+                $_SESSION['_userID']    = $stmt->lastInsertId();
                 $_SESSION['Login']      = $_POST['login'];
 
                 // echo "<script> window.location.href = 'User.php'; </script>";
