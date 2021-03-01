@@ -141,11 +141,11 @@
 
         <?php
 
-
-
             if (isset($_POST["characterChoice"])) {
 
                 $_SESSION["CharacterID"] = $_POST["characterChoice"];
+
+                echo "<meta http-equiv='refresh' content='0'>";
 
             }
 

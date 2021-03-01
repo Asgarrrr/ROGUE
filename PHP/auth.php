@@ -68,7 +68,7 @@
                 $_SESSION['Login']      = $_POST['login'];
 
                 // echo "<script> window.location.href = 'User.php'; </script>";
-                header("Refresh:0");
+                echo "<meta http-equiv='refresh' content='0'>";
 
             } else echo "<script>document.getElementById('formInfo').innerHTML = 'The two passwords do not match'; </script>";
 
@@ -105,7 +105,7 @@
 
                         // —— Redirec user to his user profil page
                         // echo "<script> window.location.href = 'User.php'; </script>";
-                        header("Refresh:0");
+                        echo "<meta http-equiv='refresh' content='0'>";
                         // —— If password is wrong, show error message
                     } else echo "<script>document.getElementById('formInfo').innerHTML = 'Wrong username or password' </script>";
                 }
