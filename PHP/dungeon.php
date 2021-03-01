@@ -1,5 +1,11 @@
 <?php
-    if (!isset($_SESSION)) session_start();
+
+    if ( !isset($_SESSION) )
+        session_start();
+
+    if ( !isset($_SESSION["_userID"]) || !isset($_SESSION["CharacterID"]) )
+        return header( "Location: ../index.php" );
+
 ?>
 
 
@@ -28,7 +34,8 @@
     <div class="flex">
         <div id="charscreen">
 
-            <p>
+        <div>
+           <p>
                 <span>
                     Level
                     <span id="level"></span>
@@ -72,6 +79,12 @@
                     <span>[ <span id="con_score">6</span> ]</span>
                 </abbr>
             </p>
+        </div>
+
+        <form action="#" method="post">
+            <input type="submit" name="logout" value="logout" />
+        </form>
+
 
         </div>
         <div id="game"></div>
@@ -79,6 +92,28 @@
 
 </body>
 <script src="../SCRIPT/dungeon.js"></script>
+
+<?php
+
+    // —— Session Destruction
+    if(isset($_POST['logout'])) {
+
+        $_SESSION = array();
+
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        header("Refresh:0");
+
+    }
+
+?>
+
 
 <script>
     loadCharacter(<?= $_SESSION["CharacterID"] ?>);
