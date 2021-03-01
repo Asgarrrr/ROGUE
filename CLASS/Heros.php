@@ -12,6 +12,7 @@
         private $class;
         private $level;
         private $experience;
+        private $maxHP;
         private $HP;
         private $str_score;
         private $dex_score;
@@ -27,6 +28,8 @@
         private $eBaseDex;
         private $eBaseInt;
         private $eBaseDef;
+        private $eBaseHP;
+        private $eBaseMP;
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -56,6 +59,7 @@
             $this->class        = $result["class"];
             $this->level        = $result["level"];
             $this->experience   = $result["experience"];
+            $this->maxHP        = $result["maxHP"];
             $this->HP           = $result["HP"];
             $this->str_score    = $result["str_score"];
             $this->dex_score    = $result["dex_score"];
@@ -73,6 +77,8 @@
             $this->eBaseDex     = $result["eBaseDex"];
             $this->eBaseInt     = $result["eBaseInt"];
             $this->eBaseDef     = $result["eBaseDef"];
+            $this->eBaseHP      = $result["eBaseHP"];
+            $this->eBaseMP      = $result["eBaseMP"];
 
         }
 
