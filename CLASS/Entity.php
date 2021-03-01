@@ -7,7 +7,7 @@
         private $_baseStr;
         private $_baseDex;
         private $_baseInt;
-        private $_baseCon;
+        private $_baseDef;
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -22,7 +22,7 @@
             $this->_baseStr = $result["eBaseStr"];
             $this->_baseDex = $result["eBaseDex"];
             $this->_baseInt = $result["eBaseInt"];
-            $this->_baseCon = $result["eBaseCon"];
+            $this->_baseDef = $result["eBaseDef"];
 
         }
 

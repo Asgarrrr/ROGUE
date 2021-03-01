@@ -12,10 +12,11 @@
         private $class;
         private $level;
         private $experience;
+        private $HP;
         private $str_score;
         private $dex_score;
         private $int_score;
-        private $con_score;
+        private $def_score;
 
         private $floor;
         private $flore;
@@ -25,7 +26,7 @@
         private $eBaseStr;
         private $eBaseDex;
         private $eBaseInt;
-        private $eBaseCon;
+        private $eBaseDef;
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -55,10 +56,11 @@
             $this->class        = $result["class"];
             $this->level        = $result["level"];
             $this->experience   = $result["experience"];
+            $this->HP           = $result["HP"];
             $this->str_score    = $result["str_score"];
             $this->dex_score    = $result["dex_score"];
             $this->int_score    = $result["int_score"];
-            $this->con_score    = $result["con_score"];
+            $this->def_score    = $result["def_score"];
 
             // —— INNER JOIN Floors ——————————————————————————
             $this->floor        = $result["floor"];
@@ -70,8 +72,23 @@
             $this->eBaseStr     = $result["eBaseStr"];
             $this->eBaseDex     = $result["eBaseDex"];
             $this->eBaseInt     = $result["eBaseInt"];
-            $this->eBaseCon     = $result["eBaseCon"];
+            $this->eBaseDef     = $result["eBaseDef"];
 
+        }
+
+        public function PhysicalAttack($target) {
+            echo "$this->name attaque $target->eName";
+            $target->defense($this->str_score);
+        }
+
+        public function MagicalAttack($target) {
+            echo "$this->name attaque $target->eName";
+            $target->defense($this->int_score);
+        }
+
+        public function defense($attack) {
+            $this->HP -= ($attack - $this->def_score);
+            echo "$this->name a perdu ".($attack - $this->def_score)."PV";
         }
 
         public function jsonSerialize() {
