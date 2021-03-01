@@ -57,7 +57,7 @@ select {
     font-weight: bold;
 }
 
-#abl_roll {
+.button {
     background-color: transparent;
     color: white;
     border: 1px solid #fff7ed;
@@ -66,7 +66,11 @@ select {
     border-radius: 4px;
     margin-bottom: 17px;
     font-family: inherit;
+}
 
+.button:disabled {
+    background: #ccc;
+    color: #1D262B;
 }
 
 ::placeholder {
@@ -156,11 +160,11 @@ select {
     content: "  ~≈.\a  ζڄ ڄ\aζ, ݢ \aζ  _ )\a   ^ ^";
 }
 
-.Halfling_M:after {
+.DarkElf_M:after {
     content: " ~≈≈≈\a( ʘدʘ)\a    ֊";
 }
 
-.Halfling_F:after {
+.DarkElf_F:after {
     content: " ~≈≈~\aζ*ʘدʘ)\aζ  ֊";
 }
 
@@ -213,4 +217,22 @@ select {
 
     margin: 10px 20px;
 
+}
+
+#game {
+    width: 100%;
+}
+
+.actions {
+    margin: 5%;
+}
+
+.actions form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.actions form input {
+    margin: 10px;
 }
