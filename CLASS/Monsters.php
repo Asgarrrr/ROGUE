@@ -1,4 +1,4 @@
-<?php 
+<?php
     class Monsters implements JsonSerializable {
 
         private $DB;
@@ -13,7 +13,7 @@
 
             // —— Prepared statement for the recuperation of the entity
             $result = $DB->prepare("
-                SELECT * FROM entity WHERE Heros._ID = ?
+                SELECT * FROM entity WHERE _eID = ?
             ");
 
             $result->execute(array($_ID));
@@ -24,15 +24,19 @@
             $this->DB           = $DB;
 
             // —— Monster ————————————————————————————————————
-            $this->_ID          = $result["_ID"];
+            $this->_ID          = $result["_eID"];
             $this->eName        = $result["eName"];
             $this->eBaseStr     = $result["eBaseStr"];
             $this->eBaseInt     = $result["eBaseInt"];
-            $this->eBaseCon     = $result["eBaseDef"];
+            $this->eBaseDef     = $result["eBaseDef"];
 
         }
 
-        public function PhysicalAttack($target) {
+        public function PhysicalAttack($target_ID) {
+
+            require "Heros.php";
+            $target = new Heros($target_ID, $this->DB);
+
             echo "$this->eName attaque $target->name";
             $target->defense($this->eBaseStr);
         }
