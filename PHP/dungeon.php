@@ -46,37 +46,37 @@
 
             <p>Experience : <span id="exp"></span></p>
 
-            <p>Hit Points   : <span id="HitP"></span></p>
+            <!-- <p>Hit Points   : <span id="HitP"></span></p>
             <p>Spell Points : <span id="SpeP"></span></p>
-            <p>Armor Class  : <span id="ArmP"></span></p>
+            <p>Armor Class  : <span id="ArmP"></span></p> -->
 
             <hr>
 
             <p>
                 <abbr title="Strength — measuring physical power and carrying capacity"> Str:
                     <span id="str_score">6</span>
-                    <span>[ <span id="str_stuff">6</span> ]</span>
+                    <span>[ <span id="astr_stuff">6</span> ]</span>
                 </abbr>
             </p>
 
             <p>
                 <abbr title="Dexterity — measuring agility, balance, coordination and reflexes"> Dex:
-                    <span id="str_score">6</span>
-                    <span>[ <span id="dex_score">6</span> ]</span>
+                    <span id="dex_score">6</span>
+                    <span>[ <span id="adex_score">6</span> ]</span>
                 </abbr>
             </p>
 
             <p>
                 <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:
-                    <span id="str_score">6</span>
-                    <span>[ <span id="int_score">6</span> ]</span>
+                    <span id="int_score">6</span>
+                    <span>[ <span id="aint_score">6</span> ]</span>
                 </abbr>
             </p>
 
             <p>
                 <abbr title="Constitution — measuring endurance, stamina and good health"> Con:
-                    <span id="str_score">6</span>
-                    <span>[ <span id="con_score">6</span> ]</span>
+                    <span id="con_score">6</span>
+                    <span>[ <span id="acon_score">6</span> ]</span>
                 </abbr>
             </p>
         </div>
@@ -116,6 +116,13 @@
 
 
 <script>
-    loadCharacter(<?= $_SESSION["CharacterID"] ?>);
+
+    new Dungeon();
+
+    new Hero(<?= $_SESSION["CharacterID"] ?>);
+
+
+
+    //loadCharacter(<?= $_SESSION["CharacterID"] ?>);
 </script>
 </html>
