@@ -87,7 +87,62 @@
 
 
         </div>
-        <div id="game"></div>
+        <div id="game">
+
+        <div>
+                                                           <!-- _
+                       /                            )
+                      (                             |\
+                     /|                              \\
+                    //                                \\
+                   ///                                 \|
+                  /( \                                  )\
+                  \\  \_                               //)
+                   \\  :\__                           ///
+                    \\     )                         // \
+                     \\:  /                         // |/
+                      \\ / \                       //  \
+                       /)   \     ___..-'         ((  \_|
+                      //     /  .'  _.'           \ \  \
+                     /|       \(  _\_____          \ | /
+                    (| _ _  __/          '-.       ) /.'
+                     \\ .  '-.__ \          \_    / / \
+                      \\_'.     > '-._   '.   \  / / /
+                       \ \      \     \    \   .' /.'
+                        \ \  '._ /     \  /   / .' |
+                         \ \_     \_   |    .'_/ __/
+                          \  \      \_ |   / /  _/ \_
+                           \  \       / _.' /  /     \
+                           \   |     /.'   / .'       '-,_
+                            \   \  .'   _.'_/             \
+               /\    /\      ) ___(    /_.'           \    |
+              | _\__// \    (.'      _/               |    |
+              \/_  __  /--'`    ,                   __/    /
+              (_ ) /b)  \  '.   :            \___.-:_/ \__/
+              /:/:  ,     ) :        (      /_.'_/-' |_ _ /
+             /:/: __/\ >  __,_.----.__\    /        (/(/(/
+            (_(,_/V .'/--'    _/  __/ |   /
+             VvvV  //`    _.-' _.'     \   \
+               n_n//     (((/->/        |   /
+               '--'         ~='          \  |
+                                          | |_,,,
+                                          \  \  /
+                                           '.__) -->
+
+
+        </div>
+
+            <div class="actions">
+                <form action="" method="post">
+                    <input type="button" class="button" value="Attaque" id="attaque">
+                    <input type="button" class="button" value="Agir" id="agir">
+                    <input type="button" class="button" value="Rester" id="rester">
+                </form>
+            </div>
+
+
+
+        </div>
     </div>
 
 </body>
@@ -115,14 +170,12 @@
 ?>
 
 
+
 <script>
 
-    new Dungeon();
+    const hero      = new Hero(<?= $_SESSION["CharacterID"] ?>);
 
-    new Hero(<?= $_SESSION["CharacterID"] ?>);
+    const monster   = new Monster();
 
-
-
-    //loadCharacter(<?= $_SESSION["CharacterID"] ?>);
 </script>
 </html>
