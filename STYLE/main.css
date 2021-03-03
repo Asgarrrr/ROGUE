@@ -292,3 +292,27 @@ input[type=button]:disabled {
     height: 20%;
     overflow: scroll;
 }
+
+#gameover {
+    height: 100%;
+    width: 100%;
+    background-color: #161d20;
+    position: fixed;
+    z-index: 100;
+    white-space: pre;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#gameover > img {
+    width: 90%;
+    max-width: 680px;
+    margin: 30px;
+}
+
+#gameover > input {
+    width: 300px;
+}
