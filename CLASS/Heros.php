@@ -13,6 +13,7 @@
         private $level;
         private $experience;
         private $HP;
+        private $MP;
         private $str_score;
         private $dex_score;
         private $int_score;
@@ -57,6 +58,7 @@
             $this->level        = $result["level"];
             $this->experience   = $result["experience"];
             $this->HP           = $result["HP"];
+            $this->MP           = $result["MP"];
             $this->str_score    = $result["str_score"];
             $this->dex_score    = $result["dex_score"];
             $this->int_score    = $result["int_score"];
@@ -89,6 +91,17 @@
         public function defense($attack) {
             $this->HP -= ($attack - $this->def_score);
             echo "$this->name a perdu ".($attack - $this->def_score)."PV";
+        }
+
+        public function saveFight($hp, $mp, $experience, $level) {
+            $save = $DB->prepare("
+            UPDATE Heros Set HP = ?, MP = ?, experience = ?, level= ?
+            WHERE Heros._ID = ?
+        ");
+
+        $save->execute(array($hp, $mp, $experience, $level, $this->$_ID));
+
+        $save = $save->fetch();
         }
 
         public function jsonSerialize() {
