@@ -66,8 +66,8 @@
                     </p>
 
                     <p>
-                        <abbr title="Constitution — measuring endurance, stamina and good health"> Con:</abbr>
-                        <span class="stat" id="con_score">—</span>
+                        <abbr title="Def — measuring endurance, stamina and good health"> Def:</abbr>
+                        <span class="stat" id="def_score">—</span>
                         <span>[ <span>10</span> ]</span>
                     </p>
 
