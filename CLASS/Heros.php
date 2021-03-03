@@ -68,6 +68,7 @@
             $this->experience   = $result["experience"];
             $this->maxHP        = $result["maxHP"];
             $this->HP           = $result["HP"];
+            $this->maxMP        = $result["maxMP"];
             $this->MP           = $result["MP"];
             $this->str_score    = $result["str_score"];
             $this->dex_score    = $result["dex_score"];
