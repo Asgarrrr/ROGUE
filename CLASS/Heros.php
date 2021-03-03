@@ -117,13 +117,23 @@
 
         public function saveFight($hp, $mp, $experience, $level) {
             $save = $DB->prepare("
-            UPDATE Heros Set HP = ?, MP = ?, experience = ?, level= ?
-            WHERE Heros._ID = ?
-        ");
+                UPDATE Heros Set HP = ?, MP = ?, experience = ?, level= ?
+                WHERE Heros._ID = ?
+            ");
 
-        $save->execute(array($hp, $mp, $experience, $level, $this->$_ID));
+            $save->execute(array($hp, $mp, $experience, $level, $this->$_ID));
 
-        $save = $save->fetch();
+            $save = $save->fetch();
+        }
+
+        public function mortPerso() {
+            
+            $delete = $DB->prepare("
+                DELETE FROM Heros
+                WHERE Heros._ID = ?
+            ");
+
+            $delete->execute(array($this->_ID));
         }
 
         public function jsonSerialize() {
