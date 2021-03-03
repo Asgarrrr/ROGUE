@@ -1,283 +1,169 @@
 class Dungeon {
 
-  constructor(floor) {
+    constructor (_heroID) {
 
-    this.floor = floor;
+        this._heroID = _heroID;
+        this.start = Date.now();
 
-    let event = Math.round(Math.random() * 10);
+    }
 
-    console.log({
-        [0]: "chest",
-        [1]: "shop",
-        [2]: "mob"
-    }[event > 1 ? 2 : event])
+    async load(){
 
-  }
+        // —— Load character data
+        this.Hero = await fetch("../API/Heros.php", {
+            method: "POST",
+            body : JSON.stringify({
+                methode: "jsonSerialize",
+                id: this._heroID
+            })
+        }).then( ( res ) => res.json() );
 
-  async mob() {
+        console.log(this.Hero);
 
-        this.mob = await fetch("../API/Heros.php", {
+        this.updateHeroUI();
+
+        // —— Defined on the user will face a monster, or meet a chest or a merchant
+
+        const monsters = [...this.Hero.fmonsters, "shop", "chest"];
+
+        this.target = monsters[~~(Math.random() * monsters.length)];
+
+        if (!isNaN(this.target)) {
+
+            // —— Load character data
+            this.target = await fetch("../API/Monsters.php", {
                 method: "POST",
                 body : JSON.stringify({
                     methode: "jsonSerialize",
-                    id: this._ID
+                    id: this.target
                 })
-            }).then( ( req ) => req.json() );
+            }).then( ( res ) => res.json() );
 
-  }
+            console.table(this.target);
 
-}
+            this.target.HP = this.target.eBaseHP;
+            this.updateMonsterUI();
 
-class Hero {
-
-    constructor(_ID){
-
-        this.load(this._ID = _ID);
-
-    }
-
-    async load() {
-
-        try {
-
-            this.stats = await fetch("../API/Heros.php", {
-                method: "POST",
-                body : JSON.stringify({
-                    methode: "jsonSerialize",
-                    id: this._ID
-                })
-            }).then( ( req ) => req.json() );
-
-            this.updateUI();
-
-        } catch (error) {
-            throw new Error(error);
+            this.loadInteractions();
         }
 
-        console.log(this.stats)
+        this.log(`${this.Hero.name} opens the doors to the ${this.Hero.floor} floor`)
 
     }
 
-    async updateUI() {
+    updateHeroUI() {
 
-        document.getElementById("char_port").classList.add(`${this.stats["eName"]}_${this.stats["gender"]}`)
+        document.getElementById("char_port" ).classList.add(`${this.Hero.eName}_${this.Hero.gender}`);
+        document.getElementById("heroName"  ).innerHTML = this.Hero.name;
+        document.getElementById("currentHP" ).innerHTML = this.Hero.HP;
+        document.getElementById("currentMP" ).innerHTML = this.Hero.MP;
 
-        document.getElementById("heroName").innerText = this.stats["name"];
+        document.getElementById("level"     ).innerHTML = this.Hero.level;
+        document.getElementById("race"      ).innerHTML = this.Hero.eName;
+        document.getElementById("class"     ).innerHTML = this.Hero.class;
+        document.getElementById("exp"       ).innerHTML = this.Hero.experience;
+        document.getElementById("potions"   ).innerHTML = 2; // —— The time I create the backend
 
-        document.getElementById("level").innerText  = this.stats["level"];
-        document.getElementById("race").innerText   = this.stats["eName"];
-        document.getElementById("class").innerText  = this.stats["class"];
+        document.getElementById("str_score" ).innerHTML = this.Hero.str_score;
+        document.getElementById("dex_score" ).innerHTML = this.Hero.dex_score;
+        document.getElementById("int_score" ).innerHTML = this.Hero.int_score;
+        document.getElementById("con_score" ).innerHTML = this.Hero.def_score;
 
-        document.getElementById("exp").innerText = this.stats["experience"];
+        document.getElementById("class"     ).innerHTML = this.Hero.class;
+        document.getElementById("class"     ).innerHTML = this.Hero.class;
 
-        document.getElementById("str_score").innerText = this.stats["str_score"];
-        document.getElementById("dex_score").innerText = this.stats["dex_score"];
-        document.getElementById("int_score").innerText = this.stats["int_score"];
-        document.getElementById("con_score").innerText = this.stats["con_score"];
-
-
-    }
-
-    def(damage) {
-
-        this.stats.eBaseHP -= Math.round(damage * (100/(100+parseInt(this.stats.eBaseDef) * 4)));
-        this.updateUI();
-
-        if (this.monster.eBaseHP <= 0 ) {
-
-            console.log('Tu es mort ;3');
-
-        }
+        this.generateHPBar(2, 20)
 
     }
 
-}
+    updateMonsterUI() {
 
-class Monster {
-
-    constructor(_ID){
-
-        this.load(this._ID = 6);
+        document.getElementById("monsterName").innerHTML = this.target.eName;
+        document.getElementById("monsterHP").innerHTML = this.generateHPBar(this.target.eBaseHP, this.target.HP);
 
     }
 
-    async load() {
 
-        try {
+    generateHPBar (maxHP, HP) {
 
-            this.monster = await fetch("../API/Monsters.php", {
-                method: "POST",
-                body : JSON.stringify({
-                    methode: "jsonSerialize",
-                    id: this._ID
-                })
-            }).then( ( req ) => req.json() );
+        let base = new Array(30).fill("░");
+        let current = new Array(~~(HP / maxHP * 30)).fill("▓").join("")
 
-            console.log(this.monster)
+        base.push(` ${HP} / ${maxHP}`)
+        base.splice(0, current.length, current );
 
-            //this.updateUI();
-
-        } catch (error) {
-            throw new Error(error);
-        }
-
-
+        return base.join("");
 
     }
 
-    async updateUI() {
+    victory() {
+        document.getElementById("monster").style.display = "none";
+        alert("—— V I C T O R Y ——")
+    }
 
-        console.log(this.monster);
+    dead() {
+        alert("—— MORT DU JOUEUR ——")
+    }
+
+    log(content) {
+
+        var oUl = document.getElementById("messages"); // récupération de la liste
+
+        var oLi = document.createElement("li");
+        var oText = document.createTextNode(content);
+
+        oLi.appendChild(oText);
+        oUl.appendChild(oLi);
 
     }
 
-    async attaque() {
+    loadInteractions() {
 
-        hero.def();
+        const attack = document.getElementById("attack")
 
-    }
+        attack.addEventListener("click", () => {
 
-    def(damage) {
+            let damages = Math.round(this.Hero.str_score * (100/(100 + (this.target.eBaseDef) * 4)));
 
-        this.monster.eBaseHP -= Math.round(damage * (100/(100+parseInt(this.monster.eBaseDef) * 4)));
-        this.updateUI();
+            if ((Math.random() * 100) < this.Hero.dex_score) {
 
-        if (this.monster.eBaseHP <= 0 ) {
+                damages *= 2;
+                this.log(`Critical hit! ${this.Hero.name} inflicts ${damages} damage to ${this.target.eName}`)
 
-            console.log('Tu es mort ;3');
+            } else {
 
-        }
+                this.log(`${this.Hero.name} inflicts ${damages} damage to ${this.target.eName}`)
 
-    }
+            }
 
-}
+            this.target.HP -= damages;
 
-// // —— Dice
-// const d = (faces) =>  (Math.floor(Math.random() * faces) + 1);
+            console.clear();
+            console.table(this.Hero);
+            console.table(this.target);
 
+            if (this.target.HP <= 0) {
+                return this.victory();
+            } else this.updateMonsterUI()
 
-// const statBonus = (stat) => Math.round((stat - 11) / 2)
+            attack.toggleAttribute("disabled");
+            setTimeout(() => {
+                attack.toggleAttribute("disabled");
 
-//     , maxSP = () => Math.round(sp_multi * level) + (int_bonus*2);
+                damages = Math.round(this.target.eBaseStr * (100/(100+ (this.Hero.eBaseDef) * 4)));
+                this.Hero.HP -= damages;
 
+                this.log(`${this.target.eName } responds by inflicting ${damages} damages too.`)
 
-// let hero = {
+                if (this.Hero.HP <= 0)
+                    this.dead();
+                else
+                    this.updateHeroUI();
 
-//     maxHP : (constitution, level) => 7 + statBonus(constitution) + level,
-
-// }
-
-
-// async function loadCharacter (userID) {
-
-//     console.log("————— Dungeon script loaded");
-
-//     console.log(userID)
-
-//     const characterData = await fetch("../API/Heros.php", {
-//         method: "POST",
-//         body: JSON.stringify({
-//             methode: "jsonSerialize",
-//             id: userID,
-//         })
-//     }).then ( ( res ) => res.json() );
-
-//     Object.assign(hero, characterData)
-
-//     // —— Loads information
-
-//     document.getElementById("char_port").classList.add(`${hero["eName"]}_${characterData["gender"]}`)
-//     document.getElementById("heroName").innerText = hero["name"];
-
-//     document.getElementById("currentHP").innerText = hero.maxHP(
-//         parseInt(hero["con_score"], 10),
-//         parseInt(hero["level"], 10)
-//     );
-
-//     // if (hero["class"] === "Fighter") {
-//     //     mysp = 0;
-//     //     maxsp = sp = 0
-//     // }
-
-//     // if (myclass == "Fighter") {
-//     //     mysp = 0;
-//     //     maxsp = mysp;
-//     //   } else {
-//     //     mysp = Math.round(sp_multi * mylvl) + (int_bonus*2);
-//     //     maxsp = mysp;
-//     //   };
-//     //   if (mysp < 0) {
-//     //     mysp = 0
-//     //   };
-
-//     // document.getElementById("currentMP").innerText = maxHP(
-//     //     parseInt(characterData["con_score"], 10),
-//     //     parseInt(characterData["level"], 10)
-//     // );
-
-//     console.log(characterData);
-
-// }
+            }, 200)
 
 
-document.getElementById("toggle").addEventListener("click", (e) => {
-    document.getElementById("charscreen").classList.toggle("open");
-})
-
-
-const attaqueBtn    = document.getElementById("attaque")
-    , action1       = document.getElementById("agir")
-    , action2       = document.getElementById("rester");
-
-
-let turn = true;
-
-
-function changeTurn() {
-
-    turn = !turn;
-
-    attaqueBtn.toggleAttribute("disabled");
-    action1.toggleAttribute("disabled");
-    action2.toggleAttribute("disabled");
-
-    if (turn === false) {
-
-        setTimeout(() => {
-            monster.attaque("HELLO");
-            changeTurn()
-        }, 1000);
-
+        })
     }
 
 }
-
-attaqueBtn.addEventListener("click", async () => {
-
-    if (turn === true) {
-        monster.def(hero.stats.eBaseStr);
-        changeTurn()
-    }
-
-
-
-}, true )
-
-
-
-// document.getElementById("attaque").addEventListener("click", async () => {
-
-//     if (turn === true) {
-
-
-
-//     }
-
-
-
-
-
-
-//     monster.lostHP(hero.stats.eBaseStr);
-
-// }, true)

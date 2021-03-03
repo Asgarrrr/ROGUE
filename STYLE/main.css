@@ -12,9 +12,14 @@ body {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     color: white;
     height: 100%;
+}
+
+.center {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 label {
@@ -31,7 +36,6 @@ select {
 
 .flex {
     display: flex;
-    align-items: end;
 }
 
 .heroName {
@@ -57,7 +61,7 @@ select {
     font-weight: bold;
 }
 
-.button {
+input[type=button] {
     background-color: transparent;
     color: white;
     border: 1px solid #fff7ed;
@@ -68,10 +72,16 @@ select {
     font-family: inherit;
 }
 
-.button:disabled {
+input[type=button]:active {
+    background-color: red;
+}
+
+input[type=button]:disabled {
     background: #ccc;
     color: #1D262B;
 }
+
+
 
 ::placeholder {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
@@ -178,10 +188,13 @@ select {
     padding: 0px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     background-color: var(--mainBG);
+}
+
+.chartoggle:hover {
+    border-color: white;
 }
 
 .chartoggle div:last-child {
@@ -191,23 +204,35 @@ select {
     margin-left: 10px;
 }
 
+.magenta {
+    color: #DB59D0;
+}
+
+.cyan {
+    color: #4488D6;
+}
+
 #charscreen {
     height: 100vh;
     width: 0;
     border-right: 1px solid white;
     box-sizing: border-box;
-    transition: width 1s;
+    transition: width ease 1s;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
+    background-color: #1d262b;
+    top: 0;
 
 }
 
 #charscreen.open {
-    width: 330px;
+    width: 270px;
 }
+
 
 #charscreen > *:first-child {
     margin-top: 90px;
@@ -219,8 +244,32 @@ select {
 
 }
 
+#charscreen .stat {
+    display: inline-block;
+    width: 30px;
+}
+
 #game {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#monster {
+    margin: auto;
+}
+
+
+.monster {
+    white-space: pre;
+    font-size: 10px;
+    margin: auto;
+}
+
+.monster:before {
+    content : "\a                                             ,--,  ,.-.\a                ,                   \,       '-,-`,'-.' | ._\a               /|           \    ,   |\         }  )/  / `-,',\a               [ '          |\  /|   | |        /  \|  |/`  ,`\a               | |       ,.`  `,` `, | |  _,...(   (      _',\a               \  \  __ ,-` `  ,  , `/ |,'      Y     (   \_L\\a                \  \_\,``,   ` , ,  /  |         )         _,/\a                 \  '  `  ,_ _`_,-,<._.<        /         /\a                  ', `>.,`  `  `   ,., |_      |         /\a                    \/`  `,   `   ,`  | /__,.-`    _,   `\\a                -,-..\  _  \  `  /  ,  / `._) _,-\`       \\a                 \_,,.) /\    ` /  / ) (-,, ``    ,        |\a                ,` )  | \_\       '-`  |  `(               \\a               /  /```(   , --, ,' \   |`<`    ,            |\a              /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)\a        ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`\a       (-, \           ) \ ('_.-._)/ /,`    /\a       | /  `          `/ \\ V   V, /`     /\a    ,--\(        ,     <_/`\\     ||      /\a   (   ,``-     \/|         \-A.A-`|     /\a  ,>,_ )_,..(    )\          -,,_-`  _--`\a (_ \|`   _,/_  /  \_            ,--`\a  \( `   <.,../`     `-.._   _,-`\a   `                      ```"
 }
 
 .actions {
@@ -235,4 +284,11 @@ select {
 
 .actions form input {
     margin: 10px;
+}
+
+#messageBox {
+    background-color:#161d20;
+    width: 100%;
+    height: 20%;
+    overflow: scroll;
 }

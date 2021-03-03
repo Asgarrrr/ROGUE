@@ -2,34 +2,41 @@
 
     class Heros implements JsonSerializable {
 
-        private $DB;
+        // —— Database ————————————————————
+        protected $DB;
 
-        private $_ID;
-        private $_IDUser;
-        private $name;
-        private $gender;
-        private $baseEntity;
-        private $class;
-        private $level;
-        private $experience;
-        private $maxHP;
-        private $HP;
-        private $str_score;
-        private $dex_score;
-        private $int_score;
-        private $def_score;
+        // —— Properties of Hero ——————————
+        private $_ID;           // Int
+        private $_IDUser;       // Int
+        private $name;          // String
+        private $gender;        // String
+        private $baseEntity;    // Int
+        private $class;         // String
+        private $level;         // Int
+        private $experience;    // Int
+        private $maxHP;         // Int
+        private $HP;            // Int
+        private $maxMP;         // Int
+        private $MP;            // Int
+        private $str_score;     // Int
+        private $dex_score;     // Int
+        private $int_score;     // Int
+        private $def_score;     // Int
 
-        private $floor;
-        private $flore;
+        // —— Floor properties ————————————
+        private $floor;         // Int
+        private $flore;         // String
+        private $fmonsters;     // Array
 
-        private $_eID;
-        private $eName;
-        private $eBaseStr;
-        private $eBaseDex;
-        private $eBaseInt;
-        private $eBaseDef;
-        private $eBaseHP;
-        private $eBaseMP;
+        // —— Base Entity Properties ——————
+        private $_eID;          // Int
+        private $eName;         // String
+        private $eBaseStr;      // Int
+        private $eBaseDex;      // Int
+        private $eBaseInt;      // Int
+        private $eBaseDef;      // Int
+        private $eBaseHP;       // Int
+        private $eBaseMP;       // Int
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -61,6 +68,8 @@
             $this->experience   = $result["experience"];
             $this->maxHP        = $result["maxHP"];
             $this->HP           = $result["HP"];
+            $this->maxMP        = $result["maxMP"];
+            $this->MP           = $result["MP"];
             $this->str_score    = $result["str_score"];
             $this->dex_score    = $result["dex_score"];
             $this->int_score    = $result["int_score"];
@@ -79,6 +88,15 @@
             $this->eBaseDef     = $result["eBaseDef"];
             $this->eBaseHP      = $result["eBaseHP"];
             $this->eBaseMP      = $result["eBaseMP"];
+            $this->fmonsters    = array(
+
+                                    $result["fmonster1"],
+                                    $result["fmonster2"],
+                                    $result["fmonster3"],
+                                    $result["fmonster4"],
+                                    $result["fmonster5"],
+
+                                );
 
         }
 
@@ -99,7 +117,7 @@
 
         public function jsonSerialize() {
 
-            echo json_encode(get_object_vars($this));
+            echo json_encode(get_object_vars($this), JSON_NUMERIC_CHECK);
 
         }
 
