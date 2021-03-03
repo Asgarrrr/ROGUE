@@ -11,7 +11,7 @@
         throw new Exception('You must indicate the action to perform.');
 
 
-    require "../CLASS/Heros.php";
+    require "../CLASS/Monsters.php";
     require "../CLASS/DB.php";
 
 
@@ -22,7 +22,12 @@
         case 'jsonSerialize':
                 $monster->jsonSerialize();
             break;
-
+        case 'PhysicalAttack':
+                $monster->PhysicalAttack($data["target"]);
+            break;
+        case 'defense':
+                $monster->defense($data["target"]);
+            break;
         default:
             # code...
             break;

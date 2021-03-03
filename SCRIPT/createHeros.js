@@ -9,12 +9,12 @@
         , str_score = document.getElementById("str_score")
         , dex_score = document.getElementById("dex_score")
         , int_score = document.getElementById("int_score")
-        , con_score = document.getElementById("con_score")
+        , def_score = document.getElementById("def_score")
         , race      = document.getElementById("race")
         , job       = document.getElementById("class")
         , gender    = document.getElementById("gender");
 
-    let str_base    = dex_base = con_base = int_base = 6
+    let str_base    = dex_base = def_base = int_base = 6
     , races       = []
     , reroll      = 3;
 
@@ -23,14 +23,17 @@
     for (let i = 1; i <= 5; i++)
         races.push(await fetchAPI('./API/Entity.php', { ID : i }));
 
+
+    console.log(races)
+
     /** Event triggered when the user changes race
      * —— Impact of Race Change on Statistics */
     race.addEventListener("change", (e) => {
 
         str_score.innerText = str_base = parseInt(races[e.target.value - 1]._baseStr);
         dex_score.innerText = dex_base = parseInt(races[e.target.value - 1]._baseDex);
-        int_score.innerText = con_base = parseInt(races[e.target.value - 1]._baseCon);
-        con_score.innerText = int_base = parseInt(races[e.target.value - 1]._baseInt);
+        int_score.innerText = int_base = parseInt(races[e.target.value - 1]._baseInt);
+        def_score.innerText = def_base = parseInt(races[e.target.value - 1]._baseDef);
 
     }, true);
 
@@ -44,7 +47,7 @@
         str_score.innerText = str_roll = Math.floor(Math.random() * 10) + 1 + str_base;
         dex_score.innerText = dex_roll = Math.floor(Math.random() * 10) + 1 + dex_base;
         int_score.innerText = int_roll = Math.floor(Math.random() * 10) + 1 + int_base;
-        con_score.innerText = con_roll = Math.floor(Math.random() * 10) + 1 + con_base;
+        def_score.innerText = def_roll = Math.floor(Math.random() * 10) + 1 + def_base;
 
         reroll === 0 && (abl_roll.style.display = "none");
 
@@ -73,7 +76,9 @@
                     str_score   : str_score.innerHTML,
                     dex_score   : dex_score.innerHTML,
                     int_score   : int_score.innerHTML,
-                    con_score   : con_score.innerHTML,
+                    def_score   : def_score.innerHTML,
+                    maxHP       : races[race.value].maxHP,
+                    HP          : races[race.value].maxHP
 
                 }),
                 mode    : 'cors'
@@ -81,7 +86,7 @@
 
             // —— Reset the form and its different elements
             form.reset();
-            str_score.innerText = dex_score.innerText = int_score.innerText = con_score.innerText = 6;
+            str_score.innerText = dex_score.innerText = int_score.innerText = def_score.innerText = 6;
 
             reroll = 3;
             abl_roll.style.display = "initial";
@@ -118,8 +123,8 @@
                         <span>${create["int_score"]}</span>
                     </abbr>
 
-                    <abbr title="Constitution — measuring endurance, stamina and good health"> Con:
-                        <span>${create["con_score"]}</span>
+                    <abbr title="Defense — measuring endurance, stamina and good health"> Def:
+                        <span>${create["def_score"]}</span>
                     </abbr>
 
                 </div>

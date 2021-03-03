@@ -16,7 +16,7 @@
             $stmt = $DB->prepare("
 
                 INSERT INTO `Heros`
-                    (`_IDUser`, `name`, `gender`, `baseEntity`, `class`, `str_score`, `dex_score`, `int_score`, `con_score`)
+                    (`_IDUser`, `name`, `gender`, `baseEntity`, `class`, `str_score`, `dex_score`, `int_score`, `def_score`)
                 VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?)
 
@@ -31,7 +31,7 @@
                 $data["str_score"],
                 $data["dex_score"],
                 $data["int_score"],
-                $data["con_score"]
+                $data["def_score"]
             ));
 
             $stmt = $DB->prepare("

@@ -18,7 +18,7 @@
 
     ?>
 
-    <div class="container">
+    <div class="center container">
 
         <h1>Select à hero</h1>
 
@@ -74,7 +74,7 @@
                     <input type="text" id="name" placeholder="The dead's names didn't matter" required>
                 </p>
 
-                <button type="button" id="abl_roll">Roll ability scores</button>
+                <button type="button" id="abl_roll" class="button">Roll ability scores</button>
 
                 <div class="rollStats">
 
@@ -90,7 +90,7 @@
                         <span id="int_score">6</span>
                     </abbr>
 
-                    <abbr title="Defense — measuring blocked damage"> Con:
+                    <abbr title="Defense — measuring blocked damage"> Def:
                         <span id="def_score">6</span>
                     </abbr>
 
@@ -102,7 +102,7 @@
                         <option value="1">Human</option>
                         <option value="2">Elf</option>
                         <option value="3">Dwarf</option>
-                        <option value="4">Halfling</option>
+                        <option value="4">Dark Elf</option>
                         <option value="5">Orc</option>
                     </select>
                 </p>

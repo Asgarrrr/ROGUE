@@ -10,90 +10,129 @@
 
 
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
 
         <link rel="stylesheet" href="../Style/main.css">
+
+        <title>Dungeon !</title>
     </head>
-    <body>
+    <body class="center">
 
-    <div id="toggle" class="chartoggle" title="Open character sheet">
-        <div class="char_port" id="char_port"></div>
-        <div class="char_baseData">
-            <span id="heroName"></span>
-            <attr class="HP">HP: <span id="currentHP">6</span></attr>
-            <attr class="MP">MP: <span id="currentMP">0</span></attr>
+        <div id="toggle" class="chartoggle">
+
+            <div class="char_port" id="char_port"></div>
+            <div class="char_baseData">
+                <span id="heroName"></span>
+                <attr class="magenta">  HP: <span id="currentHP">0</span></attr>
+                <attr class="cyan">     MP: <span id="currentMP">0</span></attr>
+            </div>
+
         </div>
-    </div>
 
-    <div class="flex">
         <div id="charscreen">
 
-        <div>
-           <p>
-                <span>
-                    Level
-                    <span id="level"></span>
-                </span>
-                <span id="race"></span>
-                <span id="class"></span>
-            </p>
+            <div>
 
-            <p>Experience : <span id="exp"></span></p>
+                <strong>
+                    <p>Level <span id="level"></span> <span id="race"></span> <span id="class"></span></p>
+                    <p>Exp      : <span id="exp"></span></p>
+                    <p>Potions  : <span id="potions"></span></p>
+                </strong>
 
-            <!-- <p>Hit Points   : <span id="HitP"></span></p>
-            <p>Spell Points : <span id="SpeP"></span></p>
-            <p>Armor Class  : <span id="ArmP"></span></p> -->
+                <hr>
 
-            <hr>
+                <strong>
+                    <p>
+                        <abbr title="Strength — measuring physical power and carrying capacity"> Str:</abbr>
+                        <span class="stat" id="str_score">—</span>
+                        <span>[ <span>10</span> ]</span>
+                    </p>
 
-            <p>
-                <abbr title="Strength — measuring physical power and carrying capacity"> Str:
-                    <span id="str_score">6</span>
-                    <span>[ <span id="astr_stuff">6</span> ]</span>
-                </abbr>
-            </p>
+                    <p>
+                        <abbr title="Dexterity — measuring agility, balance, coordination and reflexes"> Dex:</abbr>
+                        <span class="stat" id="dex_score">—</span>
+                        <span>[ <span>10</span> ]</span>
+                    </p>
 
-            <p>
-                <abbr title="Dexterity — measuring agility, balance, coordination and reflexes"> Dex:
-                    <span id="dex_score">6</span>
-                    <span>[ <span id="adex_score">6</span> ]</span>
-                </abbr>
-            </p>
+                    <p>
+                        <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:</abbr>
+                        <span class="stat" id="int_score">—</span>
+                        <span>[ <span>10</span> ]</span>
+                    </p>
 
-            <p>
-                <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:
-                    <span id="int_score">6</span>
-                    <span>[ <span id="aint_score">6</span> ]</span>
-                </abbr>
-            </p>
+                    <p>
+                        <abbr title="Constitution — measuring endurance, stamina and good health"> Con:</abbr>
+                        <span class="stat" id="con_score">—</span>
+                        <span>[ <span>10</span> ]</span>
+                    </p>
 
-            <p>
-                <abbr title="Constitution — measuring endurance, stamina and good health"> Con:
-                    <span id="con_score">6</span>
-                    <span>[ <span id="acon_score">6</span> ]</span>
-                </abbr>
-            </p>
+                </strong>
+
+                <hr>
+
+                <form action="">
+                    <p>
+                        <label for="weapon">Weapon :</label>
+                        <select id="weapon">
+
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="armor">Armor :</label>
+                        <select id="armor">
+
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="spell">Spell :</label>
+                        <select id="spell">
+
+                        </select>
+                    </p>
+                </form>
+
+            </div>
+
+
+            <form action="#" method="post">
+                <input type="submit" name="logout" value="logout" />
+            </form>
+
         </div>
 
-        <form action="#" method="post">
-            <input type="submit" name="logout" value="logout" />
-        </form>
-
-
+        <div id="game">
+            <div id="monster">
+                <span id="monsterName"></span>
+                <span id="monsterHP"></span>
+            </div>
+            <div></div>
+            <div class="actions">
+                <form action="">
+                    <input type="button" id="attack" value="Attack">
+                </form>
+            </div>
+            <div id="messageBox">
+                <ul id="messages">
+                </ul>
+            </div>
         </div>
-        <div id="game"></div>
-    </div>
 
-</body>
-<script src="../SCRIPT/dungeon.js"></script>
+    </body>
 
-<?php
+
+
+    <script src="../SCRIPT/dungeon.js"></script>
+    <script src="../SCRIPT/dungeonInteractions.js"></script>
+    <script> const test = new Dungeon("<?= $_SESSION["CharacterID"] ?>").load() </script>
+
+    <?php
 
     // —— Session Destruction
     if(isset($_POST['logout'])) {
@@ -115,14 +154,4 @@
 ?>
 
 
-<script>
-
-    new Dungeon();
-
-    new Hero(<?= $_SESSION["CharacterID"] ?>);
-
-
-
-    //loadCharacter(<?= $_SESSION["CharacterID"] ?>);
-</script>
 </html>
