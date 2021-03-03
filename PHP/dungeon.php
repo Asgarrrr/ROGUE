@@ -23,6 +23,11 @@
     </head>
     <body class="center">
 
+        <div id="gameover">
+            <img src="../Assets/gameOver.png" alt="" srcset="">
+            <input type="button" value="Retry ?">
+        </div>
+
         <div id="toggle" class="chartoggle">
 
             <div class="char_port" id="char_port"></div>
