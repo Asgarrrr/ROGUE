@@ -23,10 +23,10 @@
                 $hero->jsonSerialize();
             break;
         case 'saveFight':
-                $hero->saveFight();
+                $hero->saveFight($data["data"]);
             break;
-        case 'mortPerso':
-                $hero->mortPerso();
+        case 'deadHero':
+                $hero->deadHero();
             break;
 
         default:

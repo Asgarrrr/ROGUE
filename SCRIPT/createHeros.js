@@ -77,8 +77,8 @@
                     dex_score   : dex_score.innerHTML,
                     int_score   : int_score.innerHTML,
                     def_score   : def_score.innerHTML,
-                    maxHP       : races[race.value].maxHP,
-                    HP          : races[race.value].maxHP
+                    maxHP       : races[race.value - 1].maxHP,
+                    HP          : races[race.value - 1].maxHP
 
                 }),
                 mode    : 'cors'

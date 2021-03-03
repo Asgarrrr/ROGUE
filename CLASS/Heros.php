@@ -115,25 +115,47 @@
             echo "$this->name a perdu ".($attack - $this->def_score)."PV";
         }
 
-        public function saveFight($hp, $mp, $experience, $level) {
-            $save = $DB->prepare("
-                UPDATE Heros Set HP = ?, MP = ?, experience = ?, level= ?
-                WHERE Heros._ID = ?
+        public function saveFight($hero) {
+
+            $save = $this->DB->prepare("
+                UPDATE Heros SET
+                    level       = $hero[level],
+                    experience  =  $hero[experience],
+                    maxHP       =  $hero[maxHP],
+                    HP          =  $hero[HP],
+                    maxMP       =  $hero[maxMP],
+                    MP          =  $hero[MP],
+                    str_score   =  $hero[str_score],
+                    dex_score   =  $hero[dex_score],
+                    int_score   =  $hero[int_score],
+                    def_score   =  $hero[def_score],
+                    floor       =  $hero[floor]
+                WHERE _ID   = $hero[_ID]
             ");
 
-            $save->execute(array($hp, $mp, $experience, $level, $this->$_ID));
+            $save->execute(array(
+                $hero["level"],
+                $hero["experience"],
+                $hero["maxHP"],
+                $hero["HP"],
+                $hero["maxMP"],
+                $hero["MP"],
+                $hero["str_score"],
+                $hero["dex_score"],
+                $hero["int_score"],
+                $hero["def_score"],
+                $hero["floor"],
+                $hero["_ID"],
+            ));
 
-            $save = $save->fetch();
         }
 
-        public function mortPerso() {
-            
-            $delete = $DB->prepare("
-                DELETE FROM Heros
-                WHERE Heros._ID = ?
-            ");
+        public function deadHero() {
+
+            $delete = $this->DB->prepare("DELETE FROM Heros WHERE Heros._ID = ?");
 
             $delete->execute(array($this->_ID));
+
         }
 
         public function jsonSerialize() {

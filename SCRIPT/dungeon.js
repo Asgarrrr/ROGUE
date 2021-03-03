@@ -97,24 +97,41 @@ class Dungeon {
     }
 
     async victory() {
+
+
         document.getElementById("monster").style.display = "none";
+
         this.log("—— V I C T O R Y ——");
-        this.Hero = await fetch("../API/Heros.php", {
+        await fetch("../API/Heros.php", {
             method: "POST",
             body : JSON.stringify({
-                methode: "saveFight",
-                id: this._heroID
+                methode : "saveFight",
+                id      : this._heroID,
+                data    : this.Hero
             })
         })
     }
 
-    dead() {
-        this.log("—— MORT DU JOUEUR ——")
+    async dead() {
+
+        await fetch("../API/Heros.php", {
+            method: "POST",
+            body : JSON.stringify({
+                methode : "deadHero",
+                id      : this._heroID,
+            })
+        })
+
+        document.location.replace(
+            "../?DESTROYME=true"
+        )
+
+
     }
 
     log(content) {
 
-        var oUl = document.getElementById("messages"); 
+        var oUl = document.getElementById("messages");
 
         var oLi = document.createElement("li");
         var oText = document.createTextNode(content);

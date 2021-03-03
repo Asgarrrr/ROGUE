@@ -71,7 +71,7 @@
 
                 <p>
                     <label for="login">Name</label>
-                    <input type="text" id="name" placeholder="The dead's names didn't matter" required>
+                    <input type="text" id="name" placeholder="The dead's names didn't matter" maxlength="15" required>
                 </p>
 
                 <button type="button" id="abl_roll" class="button">Roll ability scores</button>

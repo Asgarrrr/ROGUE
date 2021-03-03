@@ -300,7 +300,7 @@ input[type=button]:disabled {
     position: fixed;
     z-index: 100;
     white-space: pre;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -315,4 +315,8 @@ input[type=button]:disabled {
 
 #gameover > input {
     width: 300px;
+}
+
+#OneeChan {
+    display: none;
 }
