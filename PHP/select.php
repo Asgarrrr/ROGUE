@@ -18,7 +18,7 @@
 
     ?>
 
-    <div class="container">
+    <div class="center container">
 
         <h1>Select à hero</h1>
 

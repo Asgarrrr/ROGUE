@@ -1,38 +1,42 @@
 
 <?php $type = empty($_GET) ? NULL : array_keys($_GET)[0]; ?>
 
-<form method="post" class="card">
+<div class="center">
 
-    <h2> <?= $type == "register" ? "New traveler" : "Back to hell..."; ?> </h2>
+    <form method="post" class="card">
 
-    <p>
-        <label for="login">Login</label>
-        <input type="text" name="login" required>
-    </p>
-
-    <p>
-        <label for="password">Password</label>
-        <input type="password" name="password" required>
-    </p>
-
-    <?php if ($type == "register") { ?>
+        <h2> <?= $type == "register" ? "New traveler" : "Back to hell..."; ?> </h2>
 
         <p>
-            <label for="password"> Confirm password</label>
-            <input type="password" name="cpassword" required>
+            <label for="login">Login</label>
+            <input type="text" name="login" required>
         </p>
 
-    <?php } ?>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+        </p>
 
-    <p id="formInfo"></p>
+        <?php if ($type == "register") { ?>
 
-    <p>
-        <button type="submit" name="submit">-|---- start</button>
-    </p>
+            <p>
+                <label for="password"> Confirm password</label>
+                <input type="password" name="cpassword" required>
+            </p>
 
-    <small> <?= $type == "register" ? "Already registered ? <a href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a href='?register'>Register</a>" ?> </small>
+        <?php } ?>
 
-</form>
+        <p id="formInfo"></p>
+
+        <p>
+            <button type="submit" name="submit">-|---- start</button>
+        </p>
+
+        <small> <?= $type == "register" ? "Already registered ? <a href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a href='?register'>Register</a>" ?> </small>
+
+    </form>
+
+</div>
 
 <?php
 
