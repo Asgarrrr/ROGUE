@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 02 mars 2021 à 16:39
+-- Généré le : mer. 03 mars 2021 à 15:07
 -- Version du serveur :  5.7.30
 -- Version de PHP : 7.4.9
 
@@ -41,7 +41,7 @@ INSERT INTO `entity` (`_eID`, `eName`, `eBaseStr`, `eBaseDex`, `eBaseInt`, `eBas
 (3, 'Dwarf', 6, 4, 6, 8, 25, 5),
 (4, 'Dark-Elf', 8, 8, 4, 4, 10, 10),
 (5, 'Orc', 8, 6, 2, 8, 30, 1),
-(6, 'Dragoon', 50, 2, 1, 10, 100, 15);
+(6, 'Dragoon', 9, 2, 1, 10, 100, 15);
 
 -- --------------------------------------------------------
 
@@ -51,15 +51,20 @@ INSERT INTO `entity` (`_eID`, `eName`, `eBaseStr`, `eBaseDex`, `eBaseInt`, `eBas
 
 CREATE TABLE `floors` (
   `_fID` int(11) NOT NULL,
-  `flore` mediumtext NOT NULL
+  `flore` mediumtext NOT NULL,
+  `fmonster1` int(11) NOT NULL,
+  `fmonster2` int(11) NOT NULL,
+  `fmonster3` int(11) NOT NULL,
+  `fmonster4` int(11) NOT NULL,
+  `fmonster5` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `floors`
 --
 
-INSERT INTO `floors` (`_fID`, `flore`) VALUES
-(1, 'Your adventure begins, the first floor is open to you, ignorant, full of bravery, you move forward without fear, while the darkness gradually begins to consume you.');
+INSERT INTO `floors` (`_fID`, `flore`, `fmonster1`, `fmonster2`, `fmonster3`, `fmonster4`, `fmonster5`) VALUES
+(1, 'Your adventure begins, the first floor is open to you, ignorant, full of bravery, you move forward without fear, while the darkness gradually begins to consume you.', 1, 6, 5, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -78,6 +83,8 @@ CREATE TABLE `heros` (
   `experience` int(11) NOT NULL DEFAULT '0',
   `maxHP` int(11) NOT NULL DEFAULT '20',
   `HP` int(11) NOT NULL DEFAULT '20',
+  `maxMP` int(11) NOT NULL DEFAULT '20',
+  `MP` int(11) NOT NULL DEFAULT '20',
   `str_score` int(11) NOT NULL,
   `dex_score` int(11) NOT NULL,
   `int_score` int(11) NOT NULL,
@@ -89,12 +96,12 @@ CREATE TABLE `heros` (
 -- Déchargement des données de la table `heros`
 --
 
-INSERT INTO `heros` (`_ID`, `_IDUser`, `name`, `gender`, `baseEntity`, `class`, `level`, `experience`, `maxHP`, `HP`, `str_score`, `dex_score`, `int_score`, `def_score`, `floor`) VALUES
-(72, 1, 'Test', 'M', 2, 'Rogue', 1, 0, 0, 0, 9, 10, 12, 10, 1),
-(73, 2, 'SayerS', 'F', 2, 'Rogue', 1, 0, 0, 0, 16, 15, 14, 10, 1),
-(74, 2, 'SreyaS', 'M', 5, 'Figther', 1, 0, 0, 0, 13, 11, 8, 16, 1),
-(76, 1, 'GrosTankSaMere', 'F', 3, 'Mage', 1, 0, 20, 20, 14, 11, 7, 17, 1),
-(77, 1, 'OCTOPUTE', 'F', 4, 'Rogue', 1, 0, 20, 20, 15, 18, 13, 9, 1);
+INSERT INTO `heros` (`_ID`, `_IDUser`, `name`, `gender`, `baseEntity`, `class`, `level`, `experience`, `maxHP`, `HP`, `maxMP`, `MP`, `str_score`, `dex_score`, `int_score`, `def_score`, `floor`) VALUES
+(72, 1, 'Test', 'M', 2, 'Rogue', 1, 0, 20, 20, 20, 20, 9, 10, 12, 10, 1),
+(73, 2, 'SayerS', 'F', 2, 'Rogue', 1, 0, 20, 20, 20, 20, 16, 15, 14, 10, 1),
+(74, 2, 'SreyaS', 'M', 5, 'Figther', 1, 0, 20, 20, 20, 20, 13, 11, 8, 16, 1),
+(76, 1, 'GrosTankSaMere', 'F', 3, 'Mage', 1, 0, 20, 20, 20, 20, 14, 11, 7, 17, 1),
+(77, 1, 'OCTOPUTE', 'F', 4, 'Rogue', 1, 0, 20, 20, 20, 20, 15, 18, 13, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -140,7 +147,12 @@ ALTER TABLE `entity`
 -- Index pour la table `floors`
 --
 ALTER TABLE `floors`
-  ADD PRIMARY KEY (`_fID`);
+  ADD PRIMARY KEY (`_fID`),
+  ADD KEY `fmonster1` (`fmonster1`),
+  ADD KEY `fmonster2` (`fmonster2`),
+  ADD KEY `fmonster3` (`fmonster3`),
+  ADD KEY `fmonster4` (`fmonster4`),
+  ADD KEY `fmonster5` (`fmonster5`);
 
 --
 -- Index pour la table `heros`
@@ -187,6 +199,16 @@ ALTER TABLE `users`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `floors`
+--
+ALTER TABLE `floors`
+  ADD CONSTRAINT `floors_ibfk_1` FOREIGN KEY (`fmonster1`) REFERENCES `entity` (`_eID`),
+  ADD CONSTRAINT `floors_ibfk_2` FOREIGN KEY (`fmonster2`) REFERENCES `entity` (`_eID`),
+  ADD CONSTRAINT `floors_ibfk_3` FOREIGN KEY (`fmonster3`) REFERENCES `entity` (`_eID`),
+  ADD CONSTRAINT `floors_ibfk_4` FOREIGN KEY (`fmonster4`) REFERENCES `entity` (`_eID`),
+  ADD CONSTRAINT `floors_ibfk_5` FOREIGN KEY (`fmonster5`) REFERENCES `entity` (`_eID`);
 
 --
 -- Contraintes pour la table `heros`
