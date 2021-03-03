@@ -115,6 +115,27 @@
             echo "$this->name a perdu ".($attack - $this->def_score)."PV";
         }
 
+        public function saveFight($hp, $mp, $experience, $level) {
+            $save = $DB->prepare("
+                UPDATE Heros Set HP = ?, MP = ?, experience = ?, level= ?
+                WHERE Heros._ID = ?
+            ");
+
+            $save->execute(array($hp, $mp, $experience, $level, $this->$_ID));
+
+            $save = $save->fetch();
+        }
+
+        public function mortPerso() {
+            
+            $delete = $DB->prepare("
+                DELETE FROM Heros
+                WHERE Heros._ID = ?
+            ");
+
+            $delete->execute(array($this->_ID));
+        }
+
         public function jsonSerialize() {
 
             echo json_encode(get_object_vars($this), JSON_NUMERIC_CHECK);

@@ -22,6 +22,12 @@
         case 'jsonSerialize':
                 $hero->jsonSerialize();
             break;
+        case 'saveFight':
+                $hero->saveFight();
+            break;
+        case 'mortPerso':
+                $hero->mortPerso();
+            break;
 
         default:
             # code...

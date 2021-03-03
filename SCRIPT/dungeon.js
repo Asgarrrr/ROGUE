@@ -67,7 +67,7 @@ class Dungeon {
         document.getElementById("str_score" ).innerHTML = this.Hero.str_score;
         document.getElementById("dex_score" ).innerHTML = this.Hero.dex_score;
         document.getElementById("int_score" ).innerHTML = this.Hero.int_score;
-        document.getElementById("con_score" ).innerHTML = this.Hero.def_score;
+        document.getElementById("def_score" ).innerHTML = this.Hero.def_score;
 
         document.getElementById("class"     ).innerHTML = this.Hero.class;
         document.getElementById("class"     ).innerHTML = this.Hero.class;
@@ -96,18 +96,25 @@ class Dungeon {
 
     }
 
-    victory() {
+    async victory() {
         document.getElementById("monster").style.display = "none";
-        alert("—— V I C T O R Y ——")
+        this.log("—— V I C T O R Y ——");
+        this.Hero = await fetch("../API/Heros.php", {
+            method: "POST",
+            body : JSON.stringify({
+                methode: "saveFight",
+                id: this._heroID
+            })
+        })
     }
 
     dead() {
-        alert("—— MORT DU JOUEUR ——")
+        this.log("—— MORT DU JOUEUR ——")
     }
 
     log(content) {
 
-        var oUl = document.getElementById("messages"); // récupération de la liste
+        var oUl = document.getElementById("messages"); 
 
         var oLi = document.createElement("li");
         var oText = document.createTextNode(content);
