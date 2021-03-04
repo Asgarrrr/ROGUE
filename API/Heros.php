@@ -28,6 +28,9 @@
         case 'deadHero':
                 $hero->deadHero();
             break;
+        case 'saveFloor':
+                $hero->saveFloor($data["floor"]);
+            break;
 
         default:
             break;
