@@ -3,6 +3,8 @@
 
 <div class="center">
 
+    <img src="Assets/title.png" class="title">
+
     <form method="post" class="card">
 
         <h2> <?= $type == "register" ? "New traveler" : "Back to hell..."; ?> </h2>
