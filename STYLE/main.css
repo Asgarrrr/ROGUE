@@ -61,7 +61,7 @@ select {
     font-weight: bold;
 }
 
-input[type=button] {
+input[type=button], input[type=submit], button {
     background-color: transparent;
     color: white;
     border: 1px solid #fff7ed;
@@ -194,7 +194,7 @@ input[type=button]:disabled {
 }
 
 .chartoggle:hover {
-    border-color: white;
+    border-color: white !important;
 }
 
 .chartoggle div:last-child {
@@ -268,7 +268,7 @@ input[type=button]:disabled {
     margin: auto;
 }
 
-.monster:before {
+.dragoon:before {
     content : "\a                                             ,--,  ,.-.\a                ,                   \,       '-,-`,'-.' | ._\a               /|           \    ,   |\         }  )/  / `-,',\a               [ '          |\  /|   | |        /  \|  |/`  ,`\a               | |       ,.`  `,` `, | |  _,...(   (      _',\a               \  \  __ ,-` `  ,  , `/ |,'      Y     (   \_L\\a                \  \_\,``,   ` , ,  /  |         )         _,/\a                 \  '  `  ,_ _`_,-,<._.<        /         /\a                  ', `>.,`  `  `   ,., |_      |         /\a                    \/`  `,   `   ,`  | /__,.-`    _,   `\\a                -,-..\  _  \  `  /  ,  / `._) _,-\`       \\a                 \_,,.) /\    ` /  / ) (-,, ``    ,        |\a                ,` )  | \_\       '-`  |  `(               \\a               /  /```(   , --, ,' \   |`<`    ,            |\a              /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)\a        ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`\a       (-, \           ) \ ('_.-._)/ /,`    /\a       | /  `          `/ \\ V   V, /`     /\a    ,--\(        ,     <_/`\\     ||      /\a   (   ,``-     \/|         \-A.A-`|     /\a  ,>,_ )_,..(    )\          -,,_-`  _--`\a (_ \|`   _,/_  /  \_            ,--`\a  \( `   <.,../`     `-.._   _,-`\a   `                      ```"
 }
 
@@ -318,13 +318,24 @@ input[type=button]:disabled {
 }
 
 
-#retry, #nextfloor {
+#retry,
+#nextfloor,
+#physical,
+#magical,
+#redoOfHealer {
     display: none;
 }
 
 .addStat {
+    display: none;
     width: 21px !important;
     position: relative;
     top: -1px;
     font-weight: bold;
+}
+
+.title {
+    width: 60%;
+    max-width: 470px;
+    margin: 60px auto;
 }
