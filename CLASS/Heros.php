@@ -16,7 +16,7 @@
         private $experience;    // Int
         private $skillsPoint;   // Int
         private $gold;          // Int
-        private $potions;       // Int       
+        private $potions;       // Int
         private $maxHP;         // Int
         private $HP;            // Int
         private $maxMP;         // Int
@@ -137,7 +137,7 @@
                     str_score   = ?,
                     dex_score   = ?,
                     int_score   = ?,
-                    def_score   = ?,
+                    def_score   = ?
                 WHERE _ID   = ?
             ");
 
@@ -162,9 +162,9 @@
 
         public function saveFloor($floor) {
 
-            $save = $this->DB->prepare("UPDATE Heros SET floor = ?");
+            $save = $this->DB->prepare("UPDATE Heros SET floor = ? WHERE _ID = ?");
 
-            $save->execute(array($floor));
+            $save->execute(array($floor, $this->_ID));
         }
 
         public function deadHero() {
