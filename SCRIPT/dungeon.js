@@ -39,7 +39,7 @@ class Dungeon {
                 body : JSON.stringify({
                     methode: "jsonSerialize",
                     id: this.target,
-                    floor: this._heroID.floor
+                    floor: this.Hero.floor
                 })
             }).then( ( res ) => res.json() );
 
