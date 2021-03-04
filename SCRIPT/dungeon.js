@@ -20,6 +20,9 @@ class Dungeon {
 
         console.log(this.Hero);
 
+        if (this.Hero.skillsPoint)
+            this.upgrade();
+
         this.updateHeroUI();
 
         // —— Defined on the user will face a monster, or meet a chest or a merchant
@@ -35,7 +38,8 @@ class Dungeon {
                 method: "POST",
                 body : JSON.stringify({
                     methode: "jsonSerialize",
-                    id: this.target
+                    id: this.target,
+                    floor: this._heroID.floor
                 })
             }).then( ( res ) => res.json() );
 
@@ -98,10 +102,18 @@ class Dungeon {
 
     async victory() {
 
-
         document.getElementById("monster").style.display = "none";
+        document.getElementById("attack").style.display = "none";
 
-        this.log("—— V I C T O R Y ——");
+        this.Hero.experience += ( ( ~~( Math.random() * 15 ) + 10 ) * this.Hero.floor );
+
+        if (this.Hero.experience - this.Hero.level * 100  > 0) {
+	        this.Hero.experience = this.Hero.experience - this.Hero.level * 100
+	        this.Hero.level++
+	        this.log(`${this.Hero.name} Gain a level, it is now level ${this.Hero.level} ! `)
+            this.upgrade();
+        }
+
         await fetch("../API/Heros.php", {
             method: "POST",
             body : JSON.stringify({
@@ -109,7 +121,32 @@ class Dungeon {
                 id      : this._heroID,
                 data    : this.Hero
             })
-        })
+        });
+
+        document.getElementById("level").innerText = this.Hero.level
+        document.getElementById("exp").innerText = this.Hero.experience
+
+        const retryBtn = document.getElementById("retry")
+            , nextFBtn = document.getElementById("nextfloor");
+
+        retryBtn.style.display = "block";
+        nextFBtn.style.display = "block";
+
+        retryBtn.addEventListener("click", () => {
+            window.location.reload();
+        }, true);
+
+        nextFBtn.addEventListener("click", () => {
+
+        }, true);
+
+        await fetch("../API/Heros.php", {
+            method: "POST",
+            body : JSON.stringify({
+                methode : "nextFloor",
+                id      : this._heroID,
+            })
+        });
     }
 
     async dead() {
@@ -122,9 +159,7 @@ class Dungeon {
             })
         })
 
-        document.location.replace(
-            "../?DESTROYME=true"
-        )
+        document.location.replace( "../?DESTROYME=true" );
 
 
     }
@@ -188,6 +223,28 @@ class Dungeon {
 
 
         })
+
     }
 
+    upgrade() {
+
+        const str_scoreAdd = document.getElementById("str_scoreAdd").style.display = "block"
+            , dex_scoreAdd = document.getElementById("dex_scoreAdd").style.display = "block"
+            , int_scoreAdd = document.getElementById("int_scoreAdd").style.display = "block"
+            , def_scoreAdd = document.getElementById("def_scoreAdd").style.display = "block";
+
+
+        str_scoreAdd.addEventListener((e) => setSkill(e));
+
+        dex_scoreAdd.addEventListener((e) => setSkill(e));
+
+        int_scoreAdd.addEventListener((e) => setSkill(e));
+
+        def_scoreAdd.addEventListener((e) => setSkill(e));
+
+    }
+
+    setSkill(arg) {
+        console.log(arg)
+    }
 }
