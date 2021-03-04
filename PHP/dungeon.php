@@ -41,7 +41,8 @@
                 <strong>
                     <p>Level <span id="level"></span> <span id="race"></span> <span id="class"></span></p>
                     <p>Exp      : <span id="exp"></span></p>
-                    <p>Potions  : <span id="potions"></span></p>
+                    <p>Potion   : <span id="potion"></span></p>
+                    <p>Gold     : <span id="gold"></span></p>
                 </strong>
 
                 <hr>
@@ -115,13 +116,17 @@
             <div id="monster">
                 <span id="monsterName"></span>
                 <span id="monsterHP"></span>
+                <p id="message"></p>
             </div>
             <div></div>
             <div class="actions">
                 <form action="">
-                    <input type="button" id="retry"     value="Rest on this floor">
-                    <input type="button" id="attack" value="Attack">
-                    <input type="button" id="nextfloor"    value="Go to the next floor">
+                    <input type="button" id="retry"         value="Rest on this floor">
+                    <input type="button" id="physical"      value="Attack">
+                    <input type="button" id="magical"       value="Use spell">
+                    <input type="button" id="redoOfHealer"  value="Drink potion ( + 10HP )">
+
+                    <input type="button" id="nextfloor"     value="Go to the next floor">
                 </form>
             </div>
             <div id="messageBox">
