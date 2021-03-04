@@ -317,6 +317,14 @@ input[type=button]:disabled {
     width: 300px;
 }
 
-#OneeChan {
+
+#retry, #nextfloor {
     display: none;
+}
+
+.addStat {
+    width: 21px !important;
+    position: relative;
+    top: -1px;
+    font-weight: bold;
 }
