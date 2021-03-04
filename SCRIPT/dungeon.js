@@ -196,7 +196,7 @@ class Dungeon {
                 this.Hero.str_score++;
 
 	        if (this.Hero.class === "Mage")
-                this.Hero.int_score+++;
+                this.Hero.int_score++;
 
             this.Hero.skillsPoint+=3;
             this.Hero.maxHP++
