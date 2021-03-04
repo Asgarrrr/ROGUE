@@ -51,24 +51,28 @@
                         <abbr title="Strength — measuring physical power and carrying capacity"> Str:</abbr>
                         <span class="stat" id="str_score">—</span>
                         <span>[ <span>10</span> ]</span>
+                        <input type="button" class="addStat" id="str_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Dexterity — measuring agility, balance, coordination and reflexes"> Dex:</abbr>
                         <span class="stat" id="dex_score">—</span>
                         <span>[ <span>10</span> ]</span>
+                        <input type="button" class="addStat" id="dex_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:</abbr>
                         <span class="stat" id="int_score">—</span>
                         <span>[ <span>10</span> ]</span>
+                        <input type="button" class="addStat" id="int_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Def — measuring endurance, stamina and good health"> Def:</abbr>
                         <span class="stat" id="def_score">—</span>
                         <span>[ <span>10</span> ]</span>
+                        <input type="button" class="addStat" id="def_scoreAdd" value="+">
                     </p>
 
                 </strong>
@@ -115,7 +119,9 @@
             <div></div>
             <div class="actions">
                 <form action="">
+                    <input type="button" id="retry"     value="Rest on this floor">
                     <input type="button" id="attack" value="Attack">
+                    <input type="button" id="nextfloor"    value="Go to the next floor">
                 </form>
             </div>
             <div id="messageBox">
