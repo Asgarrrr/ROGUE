@@ -14,6 +14,8 @@
         private $class;         // String
         private $level;         // Int
         private $experience;    // Int
+        private $gold;          // Int
+        private $potions;       // Int       
         private $maxHP;         // Int
         private $HP;            // Int
         private $maxMP;         // Int
@@ -66,6 +68,8 @@
             $this->class        = $result["class"];
             $this->level        = $result["level"];
             $this->experience   = $result["experience"];
+            $this->gold         = $result["gold"]        
+            $this->potions      = $result["potions"]            
             $this->maxHP        = $result["maxHP"];
             $this->HP           = $result["HP"];
             $this->maxMP        = $result["maxMP"];
@@ -119,23 +123,26 @@
 
             $save = $this->DB->prepare("
                 UPDATE Heros SET
-                    level       = $hero[level],
-                    experience  =  $hero[experience],
-                    maxHP       =  $hero[maxHP],
-                    HP          =  $hero[HP],
-                    maxMP       =  $hero[maxMP],
-                    MP          =  $hero[MP],
-                    str_score   =  $hero[str_score],
-                    dex_score   =  $hero[dex_score],
-                    int_score   =  $hero[int_score],
-                    def_score   =  $hero[def_score],
-                    floor       =  $hero[floor]
-                WHERE _ID   = $hero[_ID]
+                    level       = ?,
+                    experience  = ?,
+                    gold        = ?,
+                    potions     = ?,
+                    maxHP       = ?,
+                    HP          = ?,
+                    maxMP       = ?,
+                    MP          = ?,
+                    str_score   = ?,
+                    dex_score   = ?,
+                    int_score   = ?,
+                    def_score   = ?,
+                WHERE _ID   = ?
             ");
 
             $save->execute(array(
                 $hero["level"],
                 $hero["experience"],
+                $hero["gold"],
+                $hero["potions"],
                 $hero["maxHP"],
                 $hero["HP"],
                 $hero["maxMP"],
@@ -144,10 +151,16 @@
                 $hero["dex_score"],
                 $hero["int_score"],
                 $hero["def_score"],
-                $hero["floor"],
                 $hero["_ID"],
             ));
 
+        }
+
+        public function saveFloor($floor) {
+
+            $save = $this->DB->prepare("UPDATE Heros SET floor = ?")
+
+            $save->execute(array($floor));
         }
 
         public function deadHero() {
