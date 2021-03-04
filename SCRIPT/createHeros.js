@@ -131,8 +131,8 @@
 
                 <p>${create["flore"]}</p>
 
-                <button type="button" class="removeHero" value="${create["_ID"]}" name="remove">Delete</button>
                 <button type="submit" value="${create["_ID"]}" name="characterChoice">Start</button>
+                <button type="button" class="removeHero" value="${create["_ID"]}" name="remove">Delete</button>
 
             `;
 
