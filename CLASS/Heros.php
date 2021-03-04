@@ -162,7 +162,7 @@
 
         public function saveFloor($floor) {
 
-            $save = $this->DB->prepare("UPDATE Heros SET floor = ?")
+            $save = $this->DB->prepare("UPDATE Heros SET floor = ?");
 
             $save->execute(array($floor));
         }
