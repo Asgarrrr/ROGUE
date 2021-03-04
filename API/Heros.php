@@ -30,7 +30,6 @@
             break;
 
         default:
-            # code...
             break;
     }
 
