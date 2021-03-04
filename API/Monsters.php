@@ -20,13 +20,8 @@
 
     switch ($data["methode"]) {
         case 'jsonSerialize':
+                $monster->Difficulty($data["floor"]);
                 $monster->jsonSerialize();
-            break;
-        case 'PhysicalAttack':
-                $monster->PhysicalAttack($data["target"]);
-            break;
-        case 'defense':
-                $monster->defense($data["target"]);
             break;
         default:
             # code...

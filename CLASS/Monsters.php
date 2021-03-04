@@ -6,6 +6,7 @@
         private $_ID;
         private $eName;
         private $eBaseStr;
+        private $eBaseDex;
         private $eBaseInt;
         private $eBaseDef;
 
@@ -27,30 +28,21 @@
             $this->_ID          = $result["_eID"];
             $this->eName        = $result["eName"];
             $this->eBaseStr     = $result["eBaseStr"];
+            $this->eBaseDex     = $result["eBaseDex"];
             $this->eBaseInt     = $result["eBaseInt"];
             $this->eBaseDef     = $result["eBaseDef"];
             $this->eBaseHP      = $result["eBaseHP"];
             $this->eBaseMP      = $result["eBaseMP"];
 
         }
-
-        public function PhysicalAttack($target_ID) {
-
-            require "Heros.php";
-            $target = new Heros($target_ID, $this->DB);
-
-            echo "$this->eName attaque $target->name";
-            $target->defense($this->eBaseStr);
-        }
-
-        public function MagicalAttack($target) {
-            echo "$this->eName attaque $target->name";
-            $target->defense($this->eBaseInt);
-        }
-
-        public function defense($attack) {
-            $this->HP -= ($attack - $this->eBaseDef);
-            echo "$this->name a perdu ".($attack - $this->eBaseDef)."PV";
+        
+        public function Difficulty($floor) {
+            $this->eBaseStr *= $floor;
+            $this->eBaseDex *= $floor;
+            $this->eBaseInt *= $floor;
+            $this->eBaseDef *= $floor;
+            $this->eBaseHP *= $floor;
+            $this->eBaseMP *= $floor;
         }
 
         public function jsonSerialize() {
