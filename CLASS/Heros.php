@@ -14,6 +14,7 @@
         private $class;         // String
         private $level;         // Int
         private $experience;    // Int
+        private $skillsPoint;   // Int
         private $gold;          // Int
         private $potions;       // Int       
         private $maxHP;         // Int
@@ -68,8 +69,9 @@
             $this->class        = $result["class"];
             $this->level        = $result["level"];
             $this->experience   = $result["experience"];
-            $this->gold         = $result["gold"]        
-            $this->potions      = $result["potions"]            
+            $this->skillsPoint  = $result["skillsPoint"];
+            $this->gold         = $result["gold"];
+            $this->potions      = $result["potions"];
             $this->maxHP        = $result["maxHP"];
             $this->HP           = $result["HP"];
             $this->maxMP        = $result["maxMP"];
@@ -125,6 +127,7 @@
                 UPDATE Heros SET
                     level       = ?,
                     experience  = ?,
+                    skillsPoint = ?,
                     gold        = ?,
                     potions     = ?,
                     maxHP       = ?,
@@ -141,6 +144,7 @@
             $save->execute(array(
                 $hero["level"],
                 $hero["experience"],
+                $hero["skillsPoint"],
                 $hero["gold"],
                 $hero["potions"],
                 $hero["maxHP"],
