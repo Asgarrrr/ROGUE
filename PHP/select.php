@@ -58,8 +58,8 @@
 
                     <p><?= $value["flore"] ?></p>
 
-                    <button type="button" class="removeHero"  value="<?= $value["_ID"] ?>" name="remove">Delete</button>
                     <button type="submit" value="<?= $value["_ID"] ?>" name="characterChoice">Start</button>
+                    <button type="button" class="removeHero"  value="<?= $value["_ID"] ?>" name="remove">Delete</button>
 
                 </form>
 
@@ -71,7 +71,7 @@
 
                 <p>
                     <label for="login">Name</label>
-                    <input type="text" id="name" placeholder="The dead's names didn't matter" maxlength="15" required>
+                    <input type="text" id="name" placeholder="The dead's name doesn't matter" maxlength="15" required>
                 </p>
 
                 <button type="button" id="abl_roll" class="button">Roll ability scores</button>
