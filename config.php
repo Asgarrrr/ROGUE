@@ -4,8 +4,8 @@
         "hostname"  => "localhost",
         "database"  => "rogue",
         "user"      => "root",
-        "password"  => "root",
-        "port"      => "8889",
+        "password"  => "23w9j4",
+        "port"      => "3306",
 
         // —— Dev to display the key echoes, Prod will not display them.
         "dev"       =>  "Dev"
