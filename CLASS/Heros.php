@@ -45,12 +45,12 @@
 
             // —— Prepared statement for the recuperation of the entity
             $result = $DB->prepare("
-                SELECT * FROM Heros
+                SELECT * FROM heros
 
-                    INNER JOIN Floors  	ON Heros.floor		= Floors._fID
-                    INNER JOIN Entity 	ON Heros.baseEntity = Entity._eID
+                    INNER JOIN floors  	ON heros.floor		= floors._fID
+                    INNER JOIN entity 	ON heros.baseEntity = entity._eID
 
-                WHERE Heros._ID = ?
+                WHERE heros._ID = ?
             ");
 
             $result->execute(array($_ID));
@@ -124,7 +124,7 @@
         public function saveFight($hero) {
 
             $save = $this->DB->prepare("
-                UPDATE Heros SET
+                UPDATE heros SET
                     level       = ?,
                     experience  = ?,
                     skillsPoint = ?,
@@ -162,14 +162,14 @@
 
         public function saveFloor($floor) {
 
-            $save = $this->DB->prepare("UPDATE Heros SET floor = ? WHERE _ID = ?");
+            $save = $this->DB->prepare("UPDATE heros SET floor = ? WHERE _ID = ?");
 
             $save->execute(array($floor, $this->_ID));
         }
 
         public function deadHero() {
 
-            $delete = $this->DB->prepare("DELETE FROM Heros WHERE Heros._ID = ?");
+            $delete = $this->DB->prepare("DELETE FROM heros WHERE _ID = ?");
 
             $delete->execute(array($this->_ID));
 
