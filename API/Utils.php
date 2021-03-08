@@ -15,7 +15,7 @@
 
             $stmt = $DB->prepare("
 
-                INSERT INTO `Heros`
+                INSERT INTO `heros`
                     (`_IDUser`, `name`, `gender`, `baseEntity`, `class`, `str_score`, `dex_score`, `int_score`, `def_score`)
                 VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -35,12 +35,12 @@
             ));
 
             $stmt = $DB->prepare("
-                SELECT * FROM Heros
+                SELECT * FROM heros
 
-                    INNER JOIN Floors  	ON Heros.floor		= Floors._fID
-                    INNER JOIN Entity 	ON Heros.baseEntity = Entity._eID
+                    INNER JOIN floors  	ON heros.floor		= floors._fID
+                    INNER JOIN entity 	ON heros.baseEntity = entity._eID
 
-                WHERE Heros._ID = ?
+                WHERE heros._ID = ?
             ");
 
             $stmt->execute(array(
@@ -56,15 +56,13 @@
 
         case 'delete': {
 
-            $stdt = $DB->prepare("DELETE FROM `Heros` WHERE _ID = ?");
+            $stdt = $DB->prepare("DELETE FROM `heros` WHERE _ID = ?");
 
             echo $stdt->execute(array($data["id"]));
         }
-            # code...
             break;
 
         default:
-            # code...
             break;
     }
 
