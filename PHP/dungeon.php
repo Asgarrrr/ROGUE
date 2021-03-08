@@ -4,7 +4,7 @@
         session_start();
 
     if ( !isset($_SESSION["_userID"]) || !isset($_SESSION["CharacterID"]) )
-        return header( "Location: ../index.php" );
+        return header( "Location: ../" );
 
 ?>
 
@@ -106,7 +106,7 @@
             </div>
 
 
-            <form action="#" method="post">
+            <form method="post">
                 <input type="submit" name="logout" value="logout" />
             </form>
 
@@ -145,24 +145,17 @@
 
     <?php
 
-    // —— Session Destruction
-    if(isset($_POST['logout'])) {
+        // —— Session Destruction
+        if(isset($_POST['logout'])) {
 
-        $_SESSION = array();
+            $_SESSION = array();
+            session_destroy();
 
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
-            );
+            echo ("<script>window.location = window.location</script>");
+
         }
 
-        header("Refresh:0");
-
-    }
-
-?>
+    ?>
 
 
 </html>

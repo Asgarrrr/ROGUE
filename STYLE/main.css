@@ -4,6 +4,7 @@
 
 html {
     height: 100%;
+    image-rendering: crisp-edges;
 }
 
 body {
@@ -154,12 +155,12 @@ input[type=button]:disabled {
     content: "  .ﺣ.\a  ؆ﭳ ﭳ\aζ  ϊ )\aζ  -";
 }
 
-.Dwarf_M:after {
-    content: " ﱎ‴‴‴\a( ಠﱃಠ)\a    -\a   ݬζζ";
+.Dark-Elf_M:after {
+    content: " ~——~\a؆ ὍϊὍ)\a    -";
 }
 
-.Dwarf_F:after {
-    content: "  --.\a  ζڄ ڄ\aζ  ﱃ )\aﱎ  -";
+.Dark-Elf_F:after {
+    content: "  .ﺣ.\a  ؆ﭳ ﭳ\aζ  ϊ )\aζ  3";
 }
 
 .Orc_M:after {
@@ -338,4 +339,12 @@ input[type=button]:disabled {
     width: 60%;
     max-width: 470px;
     margin: 60px auto;
+}
+
+.logout {
+    text-align: center;
+}
+
+.logout > button {
+    width: 300px;
 }

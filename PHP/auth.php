@@ -1,4 +1,4 @@
-
+<!-- If the player registers or logs in  -->
 <?php $type = empty($_GET) ? NULL : array_keys($_GET)[0]; ?>
 
 <div class="center">
@@ -31,7 +31,7 @@
         <p id="formInfo"></p>
 
         <p>
-            <button type="submit" name="submit">-|---- start</button>
+            <button type="submit" name="submit">S T A R T</button>
         </p>
 
         <small> <?= $type == "register" ? "Already registered ? <a href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a href='?register'>Register</a>" ?> </small>

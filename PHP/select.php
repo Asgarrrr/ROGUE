@@ -132,6 +132,10 @@
 
         </div>
 
+        <form method="post" class="logout">
+            <button type="submit" name="logout"><—— Logout</button>
+        </form>
+
         <script>
             const idUser = "<?= $_SESSION["_userID"] ?>";
         </script>
@@ -146,6 +150,16 @@
                 $_SESSION["CharacterID"] = $_POST["characterChoice"];
 
                 echo "<meta http-equiv='refresh' content='0'>";
+
+            }
+
+            // —— Session Destruction
+            if(isset($_POST['logout'])) {
+
+                $_SESSION = array();
+                session_destroy();
+
+                echo ("<script>window.location = window.location</script>");
 
             }
 
