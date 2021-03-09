@@ -34,7 +34,7 @@
             <button type="submit" name="submit">S T A R T</button>
         </p>
 
-        <small> <?= $type == "register" ? "Already registered ? <a href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a href='?register'>Register</a>" ?> </small>
+        <small> <?= $type == "register" ? "Already registered ? <a class='loginRegister' href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a class='loginRegister' href='?register'>Register</a>" ?> </small>
 
     </form>
 
