@@ -47,12 +47,12 @@
             $addStuff->execute();
 
             $stmt = $DB->prepare("
-                SELECT * FROM Heros
+                SELECT * FROM heros
 
-                    INNER JOIN Floors  	ON Heros.floor		= Floors._fID
-                    INNER JOIN Entity 	ON Heros.baseEntity = Entity._eID
+                    INNER JOIN floors  	ON heros.floor		= floors._fID
+                    INNER JOIN entity 	ON heros.baseEntity = entity._eID
 
-                WHERE Heros._ID = ?
+                WHERE heros._ID = ?
             ");
 
             $stmt->execute( array( $insered ) );
