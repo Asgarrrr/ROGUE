@@ -1,14 +1,16 @@
 <?php
+
+    // —— Creation of the monsters class
     class Monsters implements JsonSerializable {
 
-        private $DB;
+        private $DB;        // PDO
 
-        private $_ID;
-        private $eName;
-        private $eBaseStr;
-        private $eBaseDex;
-        private $eBaseInt;
-        private $eBaseDef;
+        private $_ID;       // Int
+        private $eName;     // String
+        private $eBaseStr;  // Int
+        private $eBaseDex;  // Int
+        private $eBaseInt;  // Int
+        private $eBaseDef;  // Int
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -35,14 +37,14 @@
             $this->eBaseMP      = $result["eBaseMP"];
 
         }
-        
+
         public function Difficulty($floor) {
             $this->eBaseStr *= $floor;
             $this->eBaseDex *= $floor;
             $this->eBaseInt *= $floor;
             $this->eBaseDef *= $floor;
-            $this->eBaseHP *= $floor;
-            $this->eBaseMP *= $floor;
+            $this->eBaseHP  *= $floor;
+            $this->eBaseMP  *= $floor;
         }
 
         public function jsonSerialize() {
