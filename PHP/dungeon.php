@@ -1,8 +1,10 @@
 <?php
 
+    // —— If the session does not exist, create it
     if ( !isset($_SESSION) )
         session_start();
 
+    // —— If any login information is missing, return to the form
     if ( !isset($_SESSION["_userID"]) || !isset($_SESSION["CharacterID"]) )
         return header( "Location: ../" );
 
@@ -51,28 +53,28 @@
                     <p>
                         <abbr title="Strength — measuring physical power and carrying capacity"> Str:</abbr>
                         <span class="stat" id="str_score">—</span>
-                        <span>[ <span>10</span> ]</span>
+                         <span>[ <span id="aStr_score">10</span> ]</span>
                         <input type="button" class="addStat" id="str_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Dexterity — measuring agility, balance, coordination and reflexes"> Dex:</abbr>
                         <span class="stat" id="dex_score">—</span>
-                        <span>[ <span>10</span> ]</span>
+                         <span>[ <span id="aDex_score">10</span> ]</span>
                         <input type="button" class="addStat" id="dex_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Intelligence — measuring deductive reasoning, cognition, knowledge, memory, logic and rationality"> Int:</abbr>
                         <span class="stat" id="int_score">—</span>
-                        <span>[ <span>10</span> ]</span>
+                        <span>[ <span id="aInt_score">10</span> ]</span>
                         <input type="button" class="addStat" id="int_scoreAdd" value="+">
                     </p>
 
                     <p>
                         <abbr title="Def — measuring endurance, stamina and good health"> Def:</abbr>
                         <span class="stat" id="def_score">—</span>
-                        <span>[ <span>10</span> ]</span>
+                        <span>[ <span id="aDef_score">10</span> ]</span>
                         <input type="button" class="addStat" id="def_scoreAdd" value="+">
                     </p>
 
@@ -96,8 +98,8 @@
                     </p>
 
                     <p>
-                        <label for="spell">Spell :</label>
-                        <select id="spell">
+                        <label for="accessory">Accessory :</label>
+                        <select id="accessory">
 
                         </select>
                     </p>
@@ -140,7 +142,6 @@
 
 
     <script src="../SCRIPT/dungeon.js"></script>
-    <script src="../SCRIPT/dungeonInteractions.js"></script>
     <script> const test = new Dungeon("<?= $_SESSION["CharacterID"] ?>").load() </script>
 
     <?php
