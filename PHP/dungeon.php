@@ -116,6 +116,7 @@
 
         <div id="game">
             <div id="monster">
+                <img src="" id="monsterImage" alt="">
                 <span id="monsterName"></span>
                 <span id="monsterHP"></span>
                 <p id="message"></p>

@@ -66,6 +66,8 @@ class Dungeon {
 
             if (this.target === "chest") {
 
+
+                document.getElementById("monsterImage").src = `../Assets/chest.png`;
                 message.innerText = "You have found a chest, gleaming it seems full of treasure..."
 
                 open.value = "Open the chest";
@@ -199,6 +201,8 @@ class Dungeon {
 
     updateMonsterUI() {
 
+
+        document.getElementById("monsterImage").src = `../Assets/${this.target.eName}.png`;
         document.getElementById("monsterName").innerHTML = this.target.eName;
         document.getElementById("monsterHP").innerHTML = this.generateHPBar(this.target.eBaseHP, this.target.HP);
 
