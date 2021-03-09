@@ -15,6 +15,10 @@ body {
     height: 100%;
 }
 
+a {
+    color: white;
+}
+
 .center {
     display: flex;
     flex-direction: column;
@@ -371,3 +375,20 @@ input[type=button]:disabled {
         flex-direction: column;
     }
 }
+
+
+.leaderboard {
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+
+.leaderboardBody {
+    margin-top: 10%;
+    height: auto;
+}
+
+.leaderboardTable {
+    border-spacing: 25px;
+}
+
