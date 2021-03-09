@@ -1,9 +1,10 @@
 <?php
 
+    // —— Creation of the heros class
     class Heros implements JsonSerializable {
 
         // —— Database ————————————————————
-        protected $DB;
+        protected $DB;          // PDO
 
         // —— Properties of Hero ——————————
         private $_ID;           // Int
@@ -26,6 +27,8 @@
         private $int_score;     // Int
         private $def_score;     // Int
 
+        private $stuff;         // Array
+
         // —— Floor properties ————————————
         private $floor;         // Int
         private $flore;         // String
@@ -44,63 +47,87 @@
         public function __construct(int $_ID, PDO $DB) {
 
             // —— Prepared statement for the recuperation of the entity
-            $result = $DB->prepare("
+            $heroStmt = $DB->prepare("
                 SELECT * FROM Heros
 
-                    INNER JOIN Floors  	ON Heros.floor		= Floors._fID
-                    INNER JOIN Entity 	ON Heros.baseEntity = Entity._eID
+                    INNER JOIN Floors  	    ON Heros.floor		= Floors._fID
+                    INNER JOIN Entity 	    ON Heros.baseEntity = Entity._eID
 
                 WHERE Heros._ID = ?
             ");
 
-            $result->execute(array($_ID));
+            $heroStmt->execute(array($_ID));
+            $hero = $heroStmt->fetch();
 
-            $result = $result->fetch();
+            // —— Prepared statement for the recuperation of the inventory
+            $stuffStmt = $DB->prepare("
+                SELECT * FROM Inventory
+
+	                INNER JOIN Stuffs ON Inventory._iSID = Stuffs._sID
+
+                WHERE Inventory._iEID = ?
+
+            ");
+
+            $stuffStmt->execute(array($_ID));
+
+            // —— Divided into 3 equipment groups
+            $stuff = array([], [], []);
+
+            // —— Assignment by type
+            foreach($stuffStmt as $value)
+                array_push($stuff[$value["sType"]], $value);
 
             // —— Database ———————————————————————————————————
             $this->DB           = $DB;
 
             // —— Heros ——————————————————————————————————————
-            $this->_ID          = $result["_ID"];
-            $this->_IDUser      = $result["_IDUser"];
-            $this->name         = $result["name"];
-            $this->gender       = $result["gender"];
-            $this->baseEntity   = $result["baseEntity"];
-            $this->class        = $result["class"];
-            $this->level        = $result["level"];
-            $this->experience   = $result["experience"];
-            $this->skillsPoint  = $result["skillsPoint"];
-            $this->gold         = $result["gold"];
-            $this->potions      = $result["potions"];
-            $this->maxHP        = $result["maxHP"];
-            $this->HP           = $result["HP"];
-            $this->maxMP        = $result["maxMP"];
-            $this->MP           = $result["MP"];
-            $this->str_score    = $result["str_score"];
-            $this->dex_score    = $result["dex_score"];
-            $this->int_score    = $result["int_score"];
-            $this->def_score    = $result["def_score"];
+            $this->_ID          = $hero["_ID"];
+            $this->_IDUser      = $hero["_IDUser"];
+            $this->name         = $hero["name"];
+            $this->gender       = $hero["gender"];
+            $this->baseEntity   = $hero["baseEntity"];
+            $this->class        = $hero["class"];
+            $this->level        = $hero["level"];
+            $this->experience   = $hero["experience"];
+            $this->skillsPoint  = $hero["skillsPoint"];
+            $this->gold         = $hero["gold"];
+            $this->potions      = $hero["potions"];
+            $this->maxHP        = $hero["maxHP"];
+            $this->HP           = $hero["HP"];
+            $this->maxMP        = $hero["maxMP"];
+            $this->MP           = $hero["MP"];
+            $this->str_score    = $hero["str_score"];
+            $this->dex_score    = $hero["dex_score"];
+            $this->int_score    = $hero["int_score"];
+            $this->def_score    = $hero["def_score"];
+
+            $this->stuff        = $stuff;
+
+            $this->weapon       = $hero["weapon"];
+            $this->armor        = $hero["armor"];
+            $this->accessory    = $hero["accessory"];
 
             // —— INNER JOIN Floors ——————————————————————————
-            $this->floor        = $result["floor"];
-            $this->flore        = $result["flore"];
+            $this->floor        = $hero["floor"];
+            $this->flore        = $hero["flore"];
 
             // —— INNER JOIN Entity ——————————————————————————
-            $this->_eID         = $result["_eID"];
-            $this->eName        = $result["eName"];
-            $this->eBaseStr     = $result["eBaseStr"];
-            $this->eBaseDex     = $result["eBaseDex"];
-            $this->eBaseInt     = $result["eBaseInt"];
-            $this->eBaseDef     = $result["eBaseDef"];
-            $this->eBaseHP      = $result["eBaseHP"];
-            $this->eBaseMP      = $result["eBaseMP"];
+            $this->_eID         = $hero["_eID"];
+            $this->eName        = $hero["eName"];
+            $this->eBaseStr     = $hero["eBaseStr"];
+            $this->eBaseDex     = $hero["eBaseDex"];
+            $this->eBaseInt     = $hero["eBaseInt"];
+            $this->eBaseDef     = $hero["eBaseDef"];
+            $this->eBaseHP      = $hero["eBaseHP"];
+            $this->eBaseMP      = $hero["eBaseMP"];
             $this->fmonsters    = array(
 
-                                    $result["fmonster1"],
-                                    $result["fmonster2"],
-                                    $result["fmonster3"],
-                                    $result["fmonster4"],
-                                    $result["fmonster5"],
+                                    $hero["fmonster1"],
+                                    $hero["fmonster2"],
+                                    $hero["fmonster3"],
+                                    $hero["fmonster4"],
+                                    $hero["fmonster5"],
 
                                 );
 
@@ -137,7 +164,10 @@
                     str_score   = ?,
                     dex_score   = ?,
                     int_score   = ?,
-                    def_score   = ?
+                    def_score   = ?,
+                    weapon      = ?,
+                    armor       = ?,
+                    accessory   = ?
                 WHERE _ID   = ?
             ");
 
@@ -155,6 +185,9 @@
                 $hero["dex_score"],
                 $hero["int_score"],
                 $hero["def_score"],
+                $hero["weapon"],
+                $hero["armor"],
+                $hero["accessory"],
                 $hero["_ID"],
             ));
 
@@ -169,8 +202,10 @@
 
         public function deadHero() {
 
-            $delete = $this->DB->prepare("DELETE FROM Heros WHERE Heros._ID = ?");
+            $delete = $this->DB->prepare("DELETE FROM Inventory WHERE `_iEID` = ?");
+            $delete->execute(array($this->_ID));
 
+            $delete = $this->DB->prepare("DELETE FROM Heros WHERE Heros._ID = ?");
             $delete->execute(array($this->_ID));
 
         }
