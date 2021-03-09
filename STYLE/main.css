@@ -28,6 +28,7 @@ label {
 }
 
 input {
+    width: calc(100% - 8px);
     width: -moz-available;
 }
 
@@ -171,14 +172,13 @@ input[type=button]:disabled {
     content: "  ~≈.\a  ζڄ ڄ\aζ, ݢ \aζ  _ )\a   ^ ^";
 }
 
-.DarkElf_M:after {
-    content: " ~≈≈≈\a( ʘدʘ)\a    ֊";
+.Dwarf_M:after {
+    content: " ﱎ‴‴‴\a( ಠﱃಠ)\a\   -\a\  ݬζζ";
 }
 
-.DarkElf_F:after {
-    content: " ~≈≈~\aζ*ʘدʘ)\aζ  ֊";
+.Dwarf_F:after {
+    content: "  --.\a\ ζڄ ڄ\aζ  ﱃ )\a\ﱎ  -";
 }
-
 
 .chartoggle {
     position: absolute;
@@ -347,4 +347,9 @@ input[type=button]:disabled {
 
 .logout > button {
     width: 300px;
+}
+
+.loginRegister {
+    color: white;
+    float: right;
 }
