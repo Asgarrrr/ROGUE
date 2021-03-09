@@ -1,13 +1,14 @@
 <?php
 
+    // —— Creation of the entity class
     class Entity implements JsonSerializable {
 
-        private $_ID;
-        private $_name;
-        private $_baseStr;
-        private $_baseDex;
-        private $_baseInt;
-        private $_baseDef;
+        private $_ID;       // Int
+        private $_name;     // String
+        private $_baseStr;  // Int
+        private $_baseDex;  // Int
+        private $_baseInt;  // Int
+        private $_baseDef;  // Int
 
         public function __construct(int $_ID, PDO $DB) {
 
@@ -17,6 +18,7 @@
 
             $result = $result->fetch();
 
+            // —— Data Assignment
             $this->_ID      = $result["_eID"];
             $this->_name    = $result["eName"];
             $this->_baseStr = $result["eBaseStr"];
@@ -28,7 +30,7 @@
 
         public function jsonSerialize() {
 
-            echo json_encode(get_object_vars($this));
+            echo json_encode(get_object_vars( $this ));
 
         }
 
