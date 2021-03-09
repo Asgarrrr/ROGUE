@@ -20,7 +20,7 @@
 
     <div class="center container">
 
-        <h1>Select à hero</h1>
+        <h1>Select a hero</h1>
 
         <div class="wrapper">
 
