@@ -53,7 +53,7 @@
                     INNER JOIN Floors  	    ON Heros.floor		= Floors._fID
                     INNER JOIN Entity 	    ON Heros.baseEntity = Entity._eID
 
-                WHERE heros._ID = ?
+                WHERE Heros._ID = ?
             ");
 
             $heroStmt->execute(array($_ID));
@@ -151,7 +151,7 @@
         public function saveFight($hero) {
 
             $save = $this->DB->prepare("
-                UPDATE heros SET
+                UPDATE Heros SET
                     level       = ?,
                     experience  = ?,
                     skillsPoint = ?,
@@ -207,7 +207,7 @@
 
             $count->execute(array($this->_IDUser));
 
-            $save = $this->DB->prepare("UPDATE heros SET floor = ? WHERE _ID = ?");
+            $save = $this->DB->prepare("UPDATE Heros SET floor = ? WHERE _ID = ?");
             $save->execute(array($floor, $this->_ID));
         }
 

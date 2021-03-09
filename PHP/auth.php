@@ -52,7 +52,7 @@
             if ($_POST['password'] == $_POST['cpassword']) {
 
                 // —— Prepare and execute user selection in database
-                $stmt = $DB->prepare('SELECT Login FROM users WHERE Login = ?');
+                $stmt = $DB->prepare('SELECT Login FROM Users WHERE Login = ?');
                 $stmt->execute(array($_POST['login']));
 
                 // —— If already exists, show error message
@@ -61,7 +61,7 @@
 
                     echo "OK";
                 // —— Prepare and execute user insertion in database
-                $stmt = $DB->prepare('INSERT INTO users(Login, Password) VALUE(?, ?)');
+                $stmt = $DB->prepare('INSERT INTO Users(Login, Password) VALUE(?, ?)');
                 $stmt->execute(array(
                     $_POST['login'],
                     // Hash password
@@ -90,7 +90,7 @@
             if((!empty($_POST['login'])) && (!empty($_POST['password']))){
 
                 // Prepare and execute user selection in database
-                $stmt = $DB->prepare('SELECT _ID, Password, Login FROM users WHERE Login = ?');
+                $stmt = $DB->prepare('SELECT _ID, Password, Login FROM Users WHERE Login = ?');
                 $stmt->execute(array($_POST['login']));
                 $stmt = $stmt->fetch();
 

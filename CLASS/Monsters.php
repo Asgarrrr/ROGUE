@@ -16,7 +16,7 @@
 
             // —— Prepared statement for the recuperation of the entity
             $result = $DB->prepare("
-                SELECT * FROM entity WHERE _eID = ?
+                SELECT * FROM Entity WHERE _eID = ?
             ");
 
             $result->execute(array($_ID));

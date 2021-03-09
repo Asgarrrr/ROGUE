@@ -13,7 +13,7 @@
         public function __construct(int $_ID, PDO $DB) {
 
             // —— Prepared statement for the recuperation of the entity
-            $result = $DB->prepare("SELECT * FROM entity WHERE _eID = ?");
+            $result = $DB->prepare("SELECT * FROM Entity WHERE _eID = ?");
             $result->execute(array($_ID));
 
             $result = $result->fetch();
