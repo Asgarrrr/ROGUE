@@ -37,6 +37,7 @@
         <small> <?= $type == "register" ? "Already registered ? <a class='loginRegister' href='' onClick='window.history.replaceState(null, null, window.location.pathname);' >log in</a>" : "No account ? <a class='loginRegister' href='?register'>Register</a>" ?> </small>
 
     </form>
+    <a href="PHP/leaderboard.php" class="leaderboard">Leaderboard</a>
 
 </div>
 
