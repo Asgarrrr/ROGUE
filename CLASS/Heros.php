@@ -195,12 +195,26 @@
 
         public function saveFloor($floor) {
 
-            $save = $this->DB->prepare("UPDATE heros SET floor = ? WHERE _ID = ?");
+            $maxFloor  = $this->DB->prepare("SELECT `maxFloor` FROM Users WHERE `_ID` = ?");
+            $maxFloor = $maxFloor->fetch();
 
+            if ($maxFloor["maxFloor"] < $floor) {
+
+                $count  = $this->DB->prepare("UPDATE Users SET maxFloor = ? WHERE _ID = ?");
+                $count->execute(array($floor, $this->_IDUser));
+
+            }
+
+            $count->execute(array($this->_IDUser));
+
+            $save = $this->DB->prepare("UPDATE heros SET floor = ? WHERE _ID = ?");
             $save->execute(array($floor, $this->_ID));
         }
 
         public function deadHero() {
+
+            $count  = $this->DB->prepare("UPDATE Users SET dead = dead + 1 WHERE _ID = ?");
+            $count->execute(array($this->_IDUser));
 
             $delete = $this->DB->prepare("DELETE FROM Inventory WHERE `_iEID` = ?");
             $delete->execute(array($this->_ID));
