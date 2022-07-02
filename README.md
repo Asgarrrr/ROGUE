@@ -15,4 +15,4 @@ Here are some of its features:
  * More than 25 different enemies with their own quirks
  * ASCII Art style
 
-he code is absolutely badly done, it would be possible to redo everything 1000 times better.
+He code is absolutely badly done, it would be possible to redo everything 1000 times better.
